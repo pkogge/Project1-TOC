@@ -173,3 +173,9 @@ class SatSolver(SatSolverAbstractClass):
             
         # Return best case assignment found
         return (False, best_assignment)
+    
+    def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+        pass
+
+    def sat_simple(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+       pass
