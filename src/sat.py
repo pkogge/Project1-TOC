@@ -60,7 +60,44 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        # define bitmask based on v * e
+        # go up to that in binary
+        # we just keep incrementing the mask
+        # basically, if the mask says 10011, then we set the first vertex to 1, second to 1, third to 0, etc.
+
+        for mask in range(1 << n_vars):
+
+            assignment = {var: bool(mask & (1 << (var - 1))) for var in range(1, n_vars + 1)}   # our current assignment is based on incrementing bitmask
+
+            formula_satisfied = True                # check if assignment satisfies all clauses
+            for clause in clauses:
+                clause_satisfied = False            # reset clause_satisfied for each new clause we examine
+
+                for term in clause:
+                    var = abs(term)                 # take absolute value (accounting for the negated ones)
+                    val = assignment[var]           # set the value to be whatever the mask says for that index
+
+                    # if literal is negated, flip the value
+                    if term < 0:
+                        val = not val
+
+                    # if any literal in the clause is True, clause is True
+                    if val:
+                        clause_satisfied = True
+                        break
+
+                # if a clause is not satisfied, entire formula fails
+                if not clause_satisfied:
+                    formula_satisfied = False
+                    break
+
+            if formula_satisfied:
+                # found satisfying assignment
+                return True, assignment
+
+        # no satisfying assignment exists
+        print('no assignment')
+        return False, {}                                     # not good :(
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
