@@ -54,13 +54,69 @@ class SatSolver(SatSolverAbstractClass):
         For ease look at the Abstract Solver class and basically we are having the run method which does the saving
         of the CSV file just focus on the logic
     """
+    # Added helper functions
+    def evalute_clause(self, clause, assignment):
+        for num in clause:
+            if num > 0 and assignment.get(abs(num), None) is True:
+                return True
+            if num < 0 and assignment.get(abs(num), None) is False:
+                return True
+        return False
+    
+    def check_satisfy(self, clauses, assignment):
+        for clause in clauses:
+            if not self.evalute_clause(clause, assignment):
+                return False
+        return True
+    
+    def check_partial(self, clauses, assignment):
+        for clause in clauses:
+            clause_ok = False
+            undecided = False
+            for lit in clause:
+                var = abs(lit)
+                if var not in assignment:
+                    undecided = True
+                    continue
+                val = assignment[var]
+                if (lit > 0 and val) or (lit < 0 and not val):
+                    clause_ok = True
+                    break
+            if not clause_ok and not undecided:
+                return False
+        return True
 
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        def backtrack(var_index, assignment):
+            if var_index > n_vars:
+                if self.check_satisfy(clauses,assignment):
+                    return True, assignment
+                return False, {}
+                
+            for val in [True, False]:
+                assignment[var_index] = val
+
+                partial_assignment_good = self.check_partial(clauses, assignment)
+                if not partial_assignment_good:
+                    del assignment[var_index]
+                    continue
+                
+                ok, solution = backtrack(var_index + 1, assignment)
+                if ok:
+                    return ok, solution
+                del assignment[var_index]  # undo this choice
+            return False, {}
+        
+        return backtrack(1, {})
+
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        for assignments in itertools.product([False, True], repeat=n_vars):
+            assignment = {i+1: assignments[i] for i in range(n_vars)}
+            if self.check_satisfy(clauses, assignment):
+                return True, assignment
+        return False, {}
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
