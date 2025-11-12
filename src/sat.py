@@ -44,26 +44,80 @@ from typing import List, Tuple, Dict
 from src.helpers.sat_solver_helper import SatSolverAbstractClass
 import itertools
 
-
 class SatSolver(SatSolverAbstractClass):
-
-    """
-        NOTE: The output of the CSV file should be same as EXAMPLE OUTPUT above otherwise you will loose marks
-        For this you dont need to save anything just make sure to return exact related output.
-        
-        For ease look at the Abstract Solver class and basically we are having the run method which does the saving
-        of the CSV file just focus on the logic
-    """
-
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        #edge case checks
+        if any(len(c) == 0 for c in clauses):
+            return False, {}
+        if not clauses:
+            return True, {}
+        
+        #create empty dictionary to store variable assignments
+        #will map variable numbers to either 0 or 1, which represents true or false
+        assignment: Dict[int, int] = {}
+
+        #recursive call to helper function
+        success = self.incremental_sat(clauses, n_vars, assignment, 1)
+        
+        #no satisfying assignments found
+        if not success:
+            return False, {}
+        
+        #converting 0s and 1s to True and Falses, since that is the output format
+        assign = {i: bool(assignment.get(i, 0)) for i in range(1, n_vars + 1)}
+        return True, assign
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
 
     def sat_simple(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
+    
+    def is_clause_satisfied(self, clause, assignment):
+        for literal in clause:
+            var = abs(literal)
+            value = assignment.get(var) #looking at the current assignment of this variable (0 or 1)
+
+            #if the value of the literal is positive and the satisfiability is 1 then true
+            if literal > 0 and value == 1:
+                return True
+
+            #if the value is negative and the satisfiability is 0 then true, since if literal is false then the negation of it is true
+            if literal < 0 and value == 0:
+                return True
+
+        return False
+
+    def _formula_satisfied(self, clauses, assignment):
+        #if any clause is unsatisfied then the whole formula is unsatisfied
+        for clause in clauses:
+            if not self.is_clause_satisfied(clause, assignment):
+                return False
+        return True
+
+    def incremental_sat(self, clauses, n_vars, assignment, depth):
+        #recursive backtracking --> but the reason this is brute force is because this function doesn't cut off
+        #partial assignments, it checks clauses once all variables are assigned which is brute force
+
+        #base case, if we have assigned all the variables check if formula is satisfied
+        if depth > n_vars:
+            return self._formula_satisfied(clauses, assignment)
+
+        #trying different assignments using recursion
+        assignment[depth] = 1
+        if self.incremental_sat(clauses, n_vars, assignment, depth + 1):
+            return True
+        assignment[depth] = 0
+        if self.incremental_sat(clauses, n_vars, assignment, depth + 1):
+            return True
+
+        #backtrack if neither true nor false worrked remove this variable assignment
+        assignment.pop(depth, None)
+        return False
+
+
+
