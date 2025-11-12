@@ -46,24 +46,30 @@ import itertools
 
 
 class SatSolver(SatSolverAbstractClass):
-
     """
-        NOTE: The output of the CSV file should be same as EXAMPLE OUTPUT above otherwise you will loose marks
-        For this you dont need to save anything just make sure to return exact related output.
-        
-        For ease look at the Abstract Solver class and basically we are having the run method which does the saving
-        of the CSV file just focus on the logic
+    NOTE: The output of the CSV file should be same as EXAMPLE OUTPUT above otherwise you will loose marks
+    For this you dont need to save anything just make sure to return exact related output.
+
+    For ease look at the Abstract Solver class and basically we are having the run method which does the saving
+    of the CSV file just focus on the logic
     """
 
-
-    def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+    def sat_backtracking(
+        self, n_vars: int, clauses: List[List[int]]
+    ) -> Tuple[bool, Dict[int, bool]]:
         pass
 
-    def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+    def sat_bruteforce(
+        self, n_vars: int, clauses: List[List[int]]
+    ) -> Tuple[bool, Dict[int, bool]]:
         pass
 
-    def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+    def sat_bestcase(
+        self, n_vars: int, clauses: List[List[int]]
+    ) -> Tuple[bool, Dict[int, bool]]:
         pass
 
-    def sat_simple(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+    def sat_simple(
+        self, n_vars: int, clauses: List[List[int]]
+    ) -> Tuple[bool, Dict[int, bool]]:
         pass

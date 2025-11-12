@@ -7,6 +7,7 @@ class ProjectSelection(str, Enum):
     hamiltonian = "Hamiltonian Path/Cycle: Traveling Salesman Problems"
     graph_coloring = "Graph Coloring"
 
+
 class SubProblemSelection(str, Enum):
     brute_force = "Brute Force"
     btracking = "Backtracking"

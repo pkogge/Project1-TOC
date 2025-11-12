@@ -57,7 +57,6 @@ Instance_ID,Num_Vertices,Num_Edges,Hamiltonian_Path,Hamiltonian_Cycle,Largest_Cy
 
 """
 
-import itertools
 from typing import List, Tuple
 
 from src.helpers.hamilton_cycle_helper import HamiltonCycleAbstractClass
@@ -72,10 +71,9 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     of the CSV file just focus on the logic
     """
 
-
     def hamilton_backtracking(
         self, vertices: set, edges: List[Tuple[int]]
-    ) -> Tuple[bool, List[int], bool, List[int], int]:        
+    ) -> Tuple[bool, List[int], bool, List[int], int]:
         # return (path_exists, path, cycle_exists, cycle, largest)
         pass
 
