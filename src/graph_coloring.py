@@ -86,7 +86,46 @@ class GraphColoring(GraphColoringAbstractClass):
         return False, []
 
     def coloring_bruteforce(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[List[int]]]:
-        pass
+        allVertices = []
+
+        #Get all edges into a list
+        for edge in edges:
+            if edge[0] not in allVertices:
+                allVertices.append(edge[0])
+            if edge[1] not in allVertices:
+                allVertices.append(edge[1])
+
+        #Try all possible map combinations
+        for combination in itertools.product(range(k), repeat=len(allVertices)): #Note: I researched itertools.product() as a way to get the Cartesian product to generate possible coloring combinations
+            attempt = {}
+            for vertex, color in zip(allVertices, combination): #Creates a dictionary
+                attempt[vertex] = color
+
+            failure = 0
+            #Iteration through each key and value in this attempted dictionary
+            for vertex, color in attempt.items():
+                #Iteration to ensure no connecting edges have the same color
+                for edge in edges:
+                    if edge[0] == vertex:
+                        if attempt[edge[1]] == color:
+                            failure = 1
+                            break
+                    if edge[1] == vertex:
+                        if attempt[edge[0]] == color:
+                            failure = 1
+                            break
+                if failure == 1:
+                    break
+
+            #Return true if the attempt didn't fail
+            if failure == 0:
+                returnList = []
+                for vertex, color in attempt.items():
+                    returnList.append(vertex)
+                    returnList.append(color)
+                return (True, returnList)
+
+        return (False, [])
 
     def coloring_simple(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[List[int]]]:
         pass
