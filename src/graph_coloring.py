@@ -55,7 +55,35 @@ class GraphColoring(GraphColoringAbstractClass):
         of the CSV file just focus on the logic
     """
     def coloring_backtracking(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[List[int]]]:
-        pass
+        adjacency_list = {vertex: set() for vertex in range(1, n_vertices + 1)}
+        vertex_colors = {vertex: -1 for vertex in range(1, n_vertices + 1)}
+
+        for vertex1, vertex2 in edges:
+            adjacency_list[vertex1].add(vertex2)
+            adjacency_list[vertex2].add(vertex1)
+
+        def backtrack(vertex):
+            if vertex > n_vertices:
+                return True
+
+            for color in range(k):
+                valid = True
+                for neighbor_vertex in adjacency_list[vertex]:
+                    if vertex_colors[neighbor_vertex] == color:
+                        valid = False
+
+                if valid:
+                    vertex_colors[vertex] = color
+                    if backtrack(vertex + 1):
+                        return True
+                    vertex_colors[vertex] = -1
+
+            return False
+
+        if backtrack(1):
+            return True, [color for color in vertex_colors.values()]
+
+        return False, []
 
     def coloring_bruteforce(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[List[int]]]:
         pass

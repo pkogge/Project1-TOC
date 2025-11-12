@@ -133,14 +133,3 @@ class GraphColoringAbstractClass(ABC):
         if SubProblemSelection.best_case in self.sub_problems:
             self.save_results(results, SubProblemSelection.best_case.name)
             results = []
-
-
-
-        
-
-
-    
-    
-
-
-    
