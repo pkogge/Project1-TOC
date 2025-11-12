@@ -7,7 +7,8 @@
     "Sub Problem": [
       { "name": "brute_force", "value": "Brute Force" },
       { "name": "btracking", "value": "Backtracking" },
-      { "name": "best_case", "value": "Best Case" }
+      { "name": "best_case", "value": "Best Case" },
+      { "name": "simple", "value": "Simple" }
     ]
   }
 }

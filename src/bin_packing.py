@@ -71,8 +71,8 @@ class BinPacking(BinPackingAbstractClass):
         clauses = sorted(clauses)
         bounds = [(bin_capacity // c) for c in clauses]
 
-        for counts in product(*[range(b+1) for b in bounds]):
-            if sum(c*n for c, n in zip(clauses, counts)) == bin_capacity:
+        for counts in product(*[range(b + 1) for b in bounds]):
+            if sum(c * n for c, n in zip(clauses, counts)) == bin_capacity:
                 comb = [c for c, n in zip(clauses, counts) for _ in range(n)]
                 res.append(comb)
 
@@ -81,7 +81,19 @@ class BinPacking(BinPackingAbstractClass):
     def binpacking_simple(
         self, bin_capacity: int, clauses: List[int]
     ) -> List[List[int]]:
-        return []
+        clauses = sorted(clauses)
+        combs = {0: [[]]}
+
+        for c in clauses:
+            new = {s: [lst[:] for lst in lists] for s, lists in combs.items()}
+            for s, lists in combs.items():
+                max_ops = (bin_capacity - s) // c
+                for k in range(1, max_ops + 1):
+                    new_sum = s + k * c
+                    for comb in lists:
+                        new.setdefault(new_sum, []).append(comb + [c] * k)
+            combs = new
+        return combs.get(bin_capacity, [])
 
     def binpacking_bestcase(
         self, bin_capacity: int, clauses: List[int]
@@ -93,7 +105,7 @@ class BinPacking(BinPackingAbstractClass):
 
         while q:
             curr_sum, i, curr_combination = q.popleft()
-            if  curr_sum == bin_capacity:
+            if curr_sum == bin_capacity:
                 res.append(curr_combination)
                 continue
 
