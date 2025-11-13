@@ -59,15 +59,33 @@ class SatSolver(SatSolverAbstractClass):
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         
         variationsTriedStack = []
+        assignment = {}
+        allVars = sorted({abs(lit) for clause in clauses for lit in clause})
+
         while True:
             
+            good = 0
+            for clause in clauses:
+                if clauseSatisfied(clause, assignment):
+                    good += 1
+
+            if good == len(clauses):
+                return assigment
+            
+            bad = 0
+            for clause in clauses:
+                if clauseUnsatisfied(clause, assignment):
+                    
+
+
+
             if not (n_vars > 0):
                  return
             
             var = 1
             varValue = True
-            assigment = {}
             
+
             variationsTriedStack.append((var, varValue))
 
             
