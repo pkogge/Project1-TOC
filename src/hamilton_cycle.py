@@ -91,7 +91,7 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         #visit vertices once and return to start (cycle)
         #largestCycle cycle found 
 
-        adjacencySet = self._build_adj_set(vertices, edges) 
+        adj_set = self._build_adj_set(vertices, edges) #change name to match others 
         n = len(vertices)
         self.foundPath = None
         self.foundCycle = None
@@ -105,17 +105,51 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
             path.append(currentNode) #add to path
             visited.add(currentNode) #check as visited
 
-            if len(path) >= 3 and path[0] in adjacencySet[currentNode]: #make sure min cycle size is 3 
+            if len(path) >= 3 and path[0] in adj_set[currentNode]: #make sure min cycle size is 3 
                 if len(path) > self.largestCycle: #increse size
                     self.largestCycle = len(path)
             
                 if len(path) == n: #check if full cycle
                     if not self.foundCycle: #store
                         self.foundCycle = path + [path[0]] #add start to end to make cycle  
-     
-        
     
+            if len(path) == n: #hamiltonian path found
+                if not self.foundPath: # Store the first one
+                    self.foundPath = path[:]
 
+            if self.foundPath and self.foundCycle: #recrusive step for both found 
+                path.pop() #back tracksteps
+                visited.remove(currentNode)
+                return
+
+            for neighbor in adj_set[currentNode]:
+                if neighbor not in visited: #stay on path
+                    findPath(neighbor)
+            
+            # backtrack same steps as before 
+            path.pop()
+            visited.remove(currentNode)
+
+        for startNode in vertices: #DFS from each node
+            if not self.foundPath or not self.foundCycle:
+                findPath(startNode)
+            else:
+                break #everthing found
+
+        return ( #regular returns we need 
+            bool(self.foundPath),
+            self.foundPath,
+            bool(self.foundCycle),
+            self.foundCycle,
+            self.largestCycle
+        )
+   
+             #recurive stuff 
+
+            #backtracking --> need to pop
+
+            #return statement
+        
     def hamilton_bruteforce(
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:
