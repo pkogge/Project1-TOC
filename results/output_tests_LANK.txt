@@ -1,0 +1,93 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.5, pytest-8.4.2, pluggy-1.6.0 -- /Users/yohannesmariam/Developer/school/sem5/cse30151/Project1-TOC/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/yohannesmariam/Developer/school/sem5/cse30151/Project1-TOC
+configfile: pyproject.toml
+collecting ... collected 1 item
+
+module_tests/tests.py::test_all_data Parsed 80 instances from /Users/yohannesmariam/Developer/school/sem5/cse30151/Project1-TOC/module_tests/test_data_LANK.txt
+
+Testing 80 instances
+Instance 0: 3 items, 1 solutions
+Instance 1: 8 items, 8 solutions
+Instance 2: 7 items, 6 solutions
+Instance 3: 6 items, 4 solutions
+Instance 4: 4 items, 0 solutions
+Instance 5: 3 items, 1 solutions
+Instance 6: 5 items, 3 solutions
+Instance 7: 4 items, 2 solutions
+Instance 8: 5 items, 2 solutions
+Instance 9: 5 items, 0 solutions
+Instance 10: 10 items, 31 solutions
+Instance 11: 7 items, 4 solutions
+Instance 12: 7 items, 3 solutions
+Instance 13: 9 items, 9 solutions
+Instance 14: 15 items, 401 solutions
+Instance 15: 13 items, 20 solutions
+Instance 16: 9 items, 6 solutions
+Instance 17: 6 items, 1 solutions
+Instance 18: 7 items, 1 solutions
+Instance 19: 8 items, 4 solutions
+Instance 20: 9 items, 7 solutions
+Instance 21: 8 items, 4 solutions
+Instance 22: 9 items, 9 solutions
+Instance 23: 10 items, 15 solutions
+Instance 24: 11 items, 0 solutions
+Instance 25: 10 items, 5 solutions
+Instance 26: 9 items, 5 solutions
+Instance 27: 10 items, 10 solutions
+Instance 28: 10 items, 0 solutions
+Instance 29: 11 items, 10 solutions
+Instance 30: 12 items, 9 solutions
+Instance 31: 10 items, 11 solutions
+Instance 32: 14 items, 31 solutions
+Instance 33: 12 items, 7 solutions
+Instance 34: 13 items, 0 solutions
+Instance 35: 7 items, 0 solutions
+Instance 36: 13 items, 2 solutions
+Instance 37: 15 items, 2 solutions
+Instance 38: 16 items, 33 solutions
+Instance 39: 17 items, 34 solutions
+Instance 40: 14 items, 30 solutions
+Instance 41: 14 items, 44 solutions
+Instance 42: 14 items, 30 solutions
+Instance 43: 14 items, 44 solutions
+Instance 44: 14 items, 24 solutions
+Instance 45: 14 items, 44 solutions
+Instance 46: 14 items, 30 solutions
+Instance 47: 14 items, 44 solutions
+Instance 48: 14 items, 30 solutions
+Instance 49: 14 items, 44 solutions
+Instance 50: 14 items, 30 solutions
+Instance 51: 14 items, 44 solutions
+Instance 52: 14 items, 30 solutions
+Instance 53: 14 items, 44 solutions
+Instance 54: 14 items, 30 solutions
+Instance 55: 14 items, 44 solutions
+Instance 56: 14 items, 30 solutions
+Instance 57: 14 items, 44 solutions
+Instance 58: 14 items, 30 solutions
+Instance 59: 14 items, 44 solutions
+Instance 60: 14 items, 24 solutions
+Instance 61: 14 items, 44 solutions
+Instance 62: 14 items, 30 solutions
+Instance 63: 14 items, 44 solutions
+Instance 64: 14 items, 30 solutions
+Instance 65: 14 items, 44 solutions
+Instance 66: 14 items, 30 solutions
+Instance 67: 14 items, 44 solutions
+Instance 68: 14 items, 30 solutions
+Instance 69: 14 items, 44 solutions
+Instance 70: 16 items, 30 solutions
+Instance 71: 15 items, 44 solutions
+Instance 72: 17 items, 30 solutions
+Instance 73: 22 items, 153 solutions
+Instance 74: 19 items, 38 solutions
+Instance 75: 19 items, 70 solutions
+Instance 76: 17 items, 45 solutions
+Instance 77: 19 items, 70 solutions
+Instance 78: 21 items, 74 solutions
+Instance 79: 23 items, 134 solutions
+PASSED
+
+============================== 1 passed in 0.02s ===============================

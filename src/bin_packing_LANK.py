@@ -29,7 +29,7 @@ instance_id,bin_capacity,bins_array,method,time_taken
 
 from typing import List
 
-from src.helpers.bin_packing_helper import BinPackingAbstractClass
+from src.helpers.bin_packing_helper_LANK import BinPackingAbstractClass
 
 
 class BinPacking(BinPackingAbstractClass):
@@ -40,7 +40,6 @@ class BinPacking(BinPackingAbstractClass):
     For ease look at the Abstract Solver class and basically we are having the run method which does the saving
     of the CSV file just focus on the logic
     """
-
 
     """
     def binpacking_backtracing(

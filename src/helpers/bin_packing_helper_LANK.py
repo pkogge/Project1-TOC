@@ -60,7 +60,6 @@ class BinPackingAbstractClass(ABC):
     def binpacking_backtracing(self, bin_capacity:int, clauses:List[int]) -> List[List[int]]:
         """
         Backtracking approach to find all subsets that sum to bin_capacity.
-        Uses pruning to avoid exploring branches that exceed capacity.
         """
         results = []
         def backtrack(start: int, current_sum: int, current_bin: List[int]):
