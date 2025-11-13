@@ -92,7 +92,7 @@ class SatSolver(SatSolverAbstractClass):
                         good += 1
 
                 if good == len(clauses):
-                    return assignment
+                    return (True, assignment)
                 
                 if any(clauseUnsatisfied(clause, assignment) for clause in clauses):
 
@@ -110,7 +110,7 @@ class SatSolver(SatSolverAbstractClass):
                             backtracked = True
                             break
                     if not backtracked:
-                        return None
+                        return (False, {})
                     
                 unassigned = [v for v in allVars if v not in assignment]
                 if not unassigned:
@@ -119,9 +119,9 @@ class SatSolver(SatSolverAbstractClass):
                         if clauseSatisfied(clause, assignment):
                             good += 1
                     if good == len(clauses):
-                        return assignment
+                        return (True, assignment)
                     else: 
-                        return None
+                        return (False, {})
                         
                 var = unassigned[0]
                 assignment[var] = True
