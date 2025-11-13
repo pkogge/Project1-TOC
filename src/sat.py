@@ -60,7 +60,57 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        satisfiable = False
+        count = 0
+        while not satisfiable:
+            # check to see if all the solutions have been generated
+            if count >= 2**n_vars:
+                break
+            
+            # create a solution
+            solutions = dict()
+            binary = bin(count)[2:].zfill(n_vars)
+            assignments = [int(x) for x in list(binary)]
+            for index, val in enumerate(assignments):
+                if val == 0:
+                    solutions[index+1] = False
+                else:
+                    solutions[index+1] = True
+            # check if solution is satisfiable
+            for clause in clauses:
+                good = 0
+                for val in clause:
+                    if val<0:
+                        a = not(solutions[abs(val)])
+                        if a: good = 1
+                    else:
+                        a = solutions[abs(val)]
+                        if a: good = 1
+                if not good:
+                    break # break out of the for loop
+            
+            # if satisfiable - break and call a day
+            if good:
+                #print("good")
+                #print(solutions)
+                satisfiable = 1
+            # increment
+            count += 1 
+
+        if not satisfiable:
+            #print("bad")
+            return (False, {})
+        else:
+            return (True, solutions)
+                        
+                        
+
+        ''''for clause in clauses:
+            #for num in clause:
+                #print(num)
+            print(clause)'''
+
+        # Write the csv file as output
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
