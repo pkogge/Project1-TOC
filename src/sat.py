@@ -96,21 +96,13 @@ class SatSolver(SatSolverAbstractClass):
                 satisfiable = 1
             # increment
             count += 1 
-
+            
         if not satisfiable:
             #print("bad")
             return (False, {})
         else:
             return (True, solutions)
-                        
-                        
 
-        ''''for clause in clauses:
-            #for num in clause:
-                #print(num)
-            print(clause)'''
-
-        # Write the csv file as output
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
