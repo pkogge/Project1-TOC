@@ -95,12 +95,27 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         self.largestSize = 0 #best case 
 
         path = [] #store path
-        visited = set() #visited nodes
-        
+        visited = set() #visited nodes        
+
         def findRecursive(current: int):
             
             path.append(current)
             visited.add(current)
+
+            #check for the hamcycle
+            if len(path)>=3 and path[0] in adjacency_set[current]:
+                #check if the cycle found is the largest
+                if len(path)> self.largestSize:
+                    self.largestSize = len(path)
+                #check if it is  a complete hamiltonian cycle
+                if len(path) ==n:
+                    if not self.found_cycle: #store first one found
+                        self.found_cycle = path+[path[0]]
+            
+
+            #check for the hamPATH
+
+
 
             path.pop(curent()) #recurive stuff 
         
