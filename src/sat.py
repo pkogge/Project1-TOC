@@ -57,7 +57,84 @@ class SatSolver(SatSolverAbstractClass):
 
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        stack = []
+        assignment = [None] * (n_vars+1)
+
+        while True:
+
+            conflict = False
+            all_sat = True
+
+            for clause in clauses:
+                sat_clause = False
+                unassigned = False
+
+                for literal in clause:
+
+                    value = assignment[abs(literal)]
+
+                    if value is None:
+                        unassigned = True
+                    elif value and literal > 0:
+                        sat_clause = True
+                        break
+                    elif literal < 0 and (not value):
+                        sat_clause = True
+                        break
+
+                    if not sat_clause:
+                        all_sat = False
+                        if not unassigned:
+                            conflict = True
+                            break
+                
+            if sat_clause is True:
+
+                result = {}
+
+                i = 1
+                while i <= n_vars:
+                    if assignment[i] is None:
+                        result[i] = False
+                    else:
+                        result[i] = assignment[i]
+                    i += 1
+                return True, result
+
+            if conflict is True:
+
+                while stack:
+                    var, tried_flag = stack.pop()
+
+                    assignment[var] = None
+
+                    if tried_flag == 0:
+                        assignment[var] = False
+                        stack.append((var, 1))
+                        break
+
+                    else:
+                        return False, {}
+
+                continue
+            
+            next_var = None
+
+            i = 1
+
+            while i <= n_vars:
+
+                if assignment[i] is None:
+                    next_var = i
+                    break
+                i += 1
+            if next_var is None:
+                return False, {}
+            
+            assignment[next_var] = True
+            stack.append((next_var, 0))
+
+                
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         # define bitmask based on v * e
@@ -67,8 +144,12 @@ class SatSolver(SatSolverAbstractClass):
 
         for mask in range(1 << n_vars):
 
-            assignment = {var: bool(mask & (1 << (var - 1))) for var in range(1, n_vars + 1)}   # our current assignment is based on incrementing bitmask
-
+            assignment = {}
+            
+            for var in range(1, n_vars + 1):
+                bit = (mask >> (var - 1)) & 1
+                assignment[var] = bool(bit)
+            
             formula_satisfied = True                # check if assignment satisfies all clauses
             for clause in clauses:
                 clause_satisfied = False            # reset clause_satisfied for each new clause we examine
