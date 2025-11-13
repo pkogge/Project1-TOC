@@ -87,7 +87,17 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:        
         # return (path_exists, path, cycle_exists, cycle, largest)
-        pass
+        adjacency_set = self._build_adj_set(vertices, edges)
+        n = len(vertices)
+        self.found_path = None
+        self.found_cycle = None
+        
+
+    
+
+
+
+    
 
     def hamilton_bruteforce(
         self, vertices: set, edges: List[Tuple[int]]
@@ -137,3 +147,7 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:
         pass
+    
+
+
+if __name__ == "__main__":
