@@ -158,7 +158,7 @@ class SatSolver(SatSolverAbstractClass):
             def 
 
         
-
+ 
 
                     if varValue == 0:
                         a = not(solutions[abs(val)])
@@ -223,6 +223,7 @@ class SatSolver(SatSolverAbstractClass):
         return (Satisfiability, dictionaryClauses)
     #Try 3
     # get all assignments, try one, 
+    
 '''
 
                 
