@@ -87,10 +87,22 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:        
         # return (path_exists, path, cycle_exists, cycle, largest)
-        adjacency_set = self._build_adj_set(vertices, edges)
+        adjacency_set = self._build_adj_set(vertices, edges) 
         n = len(vertices)
         self.found_path = None
         self.found_cycle = None
+
+        self.largestSize = 0 #best case 
+
+        path = [] #store path
+        visited = set() #visited nodes
+        
+        def findRecursive(current: int):
+            
+            path.append(current)
+            visited.add(current)
+
+            path.pop(curent()) #recurive stuff 
         
 
     
