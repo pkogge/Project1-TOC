@@ -1,0 +1,14 @@
+{
+  "Project Configuration": {
+    "Selection": {
+      "name": "sat",
+      "value": "SAT"
+    },
+    "Sub Problem": [
+      {
+        "name": "brute_force",
+        "value": "Brute Force"
+      }
+    ]
+  }
+}

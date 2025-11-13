@@ -1,49 +1,99 @@
 import os
+import re
 from typing import List, Tuple, Any
 
-def parse_multi_instance_dimacs(path: str) -> Tuple[str, int, List[List[int]]]:
+def _tokenize_dimacs_line(line: str) -> List[str]:
+    """
+    Normalize a DIMACS/CSV-DIMACS line into a list of tokens.
+    Supports space-separated, comma-separated, or mixed.
+    """
+    line = line.strip()
+    if not line:
+        return []
+    # split on commas OR whitespace
+    tokens = [t for t in re.split(r"[,\s]+", line) if t]
+    return tokens
+
+def parse_multi_instance_dimacs(path: str) -> List[Tuple[str, int, List[List[int]]]]:
     """
     Parses a DIMACS-like file containing multiple CNF instances.
     Returns a list of (instance_id, n_vars, clauses) tuples.
+
+    Now supports:
+      - space-separated DIMACS (standard)
+      - comma-separated DIMACS-like lines (CSV-style)
+      - mixtures of commas and whitespace
     """
 
-    if not os.path.exists(path = path):
+    if not os.path.exists(path):
         raise Exception(f"File path: {path} does not exists!!")
 
-    instances = []
+    instances: List[Tuple[str, int, List[List[int]]]] = []
+
     with open(path) as f:
+        # keep non-empty lines only
         lines = [ln.strip() for ln in f if ln.strip()]
-    
+
     i = 0
     while i < len(lines):
         line = lines[i]
-        if line.startswith("c "):
-            # Example: c 3 2 ?
-            parts = line.split()
-            instance_id = parts[1] if len(parts) > 1 else str(len(instances) + 1)
+        tokens = _tokenize_dimacs_line(line)
+
+        if not tokens:
+            i += 1
+            continue
+
+        # Instance header line: starts with 'c' (or 'c,' in CSV style)
+        if tokens[0] == "c":
+            # Example comment line:
+            #   c 3 2 ?
+            #   c,1000,2,?
+            instance_id = tokens[1] if len(tokens) > 1 else str(len(instances) + 1)
+
             i += 1
             if i >= len(lines):
                 break
-            # Expect next line: p cnf n_vars n_clauses
-            if not lines[i].startswith("p cnf"):
+
+            # Expect next line: p cnf n_vars n_clauses (spaces or commas)
+            header_tokens = _tokenize_dimacs_line(lines[i])
+            if len(header_tokens) < 4 or header_tokens[0] != "p" or header_tokens[1] != "cnf":
                 raise ValueError(f"Expected 'p cnf' after {line}")
-            _, _, n_vars_str, n_clauses_str = lines[i].split()
-            n_vars = int(n_vars_str)
-            n_clauses = int(n_clauses_str)
+
+            n_vars = int(header_tokens[2])
+            n_clauses = int(header_tokens[3])
+
             i += 1
-            clauses = []
-            # Read next n_clauses lines (allow commas)
+            clauses: List[List[int]] = []
+
+            # Read up to n_clauses clause lines, stopping early if we hit a new 'c' line
             for _ in range(n_clauses):
-                if i >= len(lines) or lines[i].startswith("c "):
+                if i >= len(lines):
                     break
-                clause = [int(x) for x in lines[i].replace(",", " ").split() if x != "0"]
+
+                clause_line = lines[i]
+                clause_tokens = _tokenize_dimacs_line(clause_line)
+                if not clause_tokens:
+                    i += 1
+                    continue
+
+                # New instance starts → stop reading clauses for this one
+                if clause_tokens[0] == "c":
+                    break
+
+                # Convert clause tokens to ints, ignoring the terminating 0
+                clause = [int(x) for x in clause_tokens if x != "0"]
                 if clause:
                     clauses.append(clause)
+
                 i += 1
+
             instances.append((instance_id, n_vars, clauses))
         else:
+            # Not a 'c' line → skip
             i += 1
+
     return instances
+
 
 
 def parse_multi_instance_graph(path: str):
