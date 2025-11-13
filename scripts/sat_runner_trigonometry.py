@@ -90,25 +90,25 @@ def main():
         print("Usage: uv run scripts/local_sat_runner.py <input.cnf> <resultsfile.csv>")
         sys.exit(1)
 
-    inpath = sys.argv[1]
-    outcsv = sys.argv[2]
+    input = sys.argv[1]
+    output = sys.argv[2]
 
     #using helper given to us
-    instances = parse_multi_instance_dimacs(inpath)
+    instances = parse_multi_instance_dimacs(input)
     if not instances:
         print("No instances parsed. Check the input file.")
         sys.exit(1)
 
     #using my satsolver brute force function
-    solver = SatSolver(cnf_file_input_path=inpath, result_file_name="output_trigonometry")
+    solver = SatSolver(cnf_file_input_path=input, result_file_name="output_trigonometry")
 
     #outputting the csv in the order necessary, saving variables for the plot
-    nvars_list, times_list, sat_flags = write_results_csv(instances, solver, outcsv)
+    nvars_list, times_list, sat_flags = write_results_csv(instances, solver, output)
 
     #making the plot
 
-    #sending it to the same place as the outcsv file which was results 
-    outdir = os.path.dirname(outcsv) or "."
+    #sending it to the same place as the output file which was results 
+    outdir = os.path.dirname(output) or "."
     os.makedirs(outdir, exist_ok=True)
     out_png = os.path.join(outdir, "output_graph_trigonometry.png")
 
