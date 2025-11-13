@@ -127,6 +127,7 @@ class SatSolver(SatSolverAbstractClass):
                 assignment[var] = True
                 variationsTriedStack.append((var, [True]))            
 
+        return final()
 
 
 
