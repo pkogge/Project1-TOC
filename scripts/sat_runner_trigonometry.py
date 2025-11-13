@@ -78,7 +78,7 @@ def plot_from_results(nvars_list, times_list, sat_flags, out_png="sat_solver_per
             plt.plot(xvals, scale * yref, linestyle='--', label='2^n (scaled)')
 
     plt.xlabel("Number of Variables")
-    plt.ylabel("Time (seconds)")
+    plt.ylabel("Time (in seconds)")
     plt.title("SAT Solver Performance (Brute Force)")
     plt.legend(loc="upper left")
     plt.tight_layout()
@@ -87,7 +87,6 @@ def plot_from_results(nvars_list, times_list, sat_flags, out_png="sat_solver_per
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: uv run scripts/local_sat_runner.py <input.cnf> <resultsfile.csv>")
         sys.exit(1)
 
     input = sys.argv[1]
