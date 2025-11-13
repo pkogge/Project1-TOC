@@ -86,44 +86,33 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     def hamilton_backtracking(
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:        
-        # return (path_exists, path, cycle_exists, cycle, largest)
-        adjacency_set = self._build_adj_set(vertices, edges) 
-        n = len(vertices)
-        self.found_path = None
-        self.found_cycle = None
+        # return (path_exists, path, cycle_exists, cycle, largestCycle)
+        #visit vertices once (path) 
+        #visit vertices once and return to start (cycle)
+        #largestCycle cycle found 
 
-        self.largestSize = 0 #best case 
+        adjacencySet = self._build_adj_set(vertices, edges) 
+        n = len(vertices)
+        self.foundPath = None
+        self.foundCycle = None
+
+        self.largestCycle = 0 #size of longest cylce 
 
         path = [] #store path
-        visited = set() #visited nodes        
+        visited = set() #visited nodes     
 
-        def findRecursive(current: int):
+        def findPath(currentNode: int): #path exisits 
+            path.append(currentNode) #add to path
+            visited.add(currentNode) #check as visited
+
+            if len(path) >= 3 and path[0] in adjacencySet[currentNode]: #make sure min cycle size is 3 
+                if len(path) > self.largestCycle: #increse size
+                    self.largestCycle = len(path)
             
-            path.append(current)
-            visited.add(current)
-
-            #check for the hamcycle
-            if len(path)>=3 and path[0] in adjacency_set[current]:
-                #check if the cycle found is the largest
-                if len(path)> self.largestSize:
-                    self.largestSize = len(path)
-                #check if it is  a complete hamiltonian cycle
-                if len(path) ==n:
-                    if not self.found_cycle: #store first one found
-                        self.found_cycle = path+[path[0]]
-            
-            #check for the hamPATH
-            if len(path) ==n: 
-                if not self.found_path: #store first path
-                    self.found_path= path[:]
-
-
-
-            path.pop(current()) #recurive stuff 
-
-            #backtracking --> need to pop
-
-            #return statement
+                if len(path) == n: #check if full cycle
+                    if not self.foundCycle: #store
+                        self.foundCycle = path + [path[0]] #add start to end to make cycle  
+     
         
     
 
