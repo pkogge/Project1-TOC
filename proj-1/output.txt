@@ -1,0 +1,13 @@
+Problem 1:
+Variables: 4, Clause: 10
+UNSAT
+
+Problem 2:
+Variables: 4, Clause: 10
+SAT
+1 2 3 -4
+
+Problem 3:
+Variables: 4, Clause: 10
+SAT
+-1 -2 3 4
