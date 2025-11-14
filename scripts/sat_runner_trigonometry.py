@@ -29,21 +29,28 @@ def write_results_csv(instances, solver: SatSolver, out_csv: str):
     os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
     nvars_list, times_list, sat_flags = [], [], []
 
-    with open(out_csv, "w", newline="", encoding="utf-8") as f:
+    with open(out_csv, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["instance_id","n_vars","n_clauses","method","satisfiable","time_seconds","solution"])
 
         #timing how long it takes
         for (inst_id, n_vars, clauses) in instances:
             n_clauses = len(clauses)
-            t0 = time.perf_counter()
-            ok, assign = solver.sat_bruteforce(n_vars, clauses)
-            dt = time.perf_counter() - t0
+            t_start = time.perf_counter()
+            sat, assign = solver.sat_bruteforce(n_vars, clauses)
+            t_end = time.perf_counter() - t_start
 
             method = "BruteForce"
-            sat_flag = "S" if ok else "U"
-            sol_str = str(assign) if ok else "{}"
+            if sat:
+                sat_flag = "S" 
+            else:
+                sat_flag = "U"
+            if sat:
+                sol_str = str(assign) 
+            else:
+                sol_str = "{}"
 
+<<<<<<< HEAD
             #these are the rows
             w.writerow([inst_id, n_vars, n_clauses, method, sat_flag, dt, sol_str])
 
@@ -51,6 +58,13 @@ def write_results_csv(instances, solver: SatSolver, out_csv: str):
             #times_list needed for the graph
             times_list.append(dt)
             sat_flags.append(ok)
+=======
+            w.writerow([inst_id, n_vars, n_clauses, method, sat_flag, t_end, sol_str])
+
+            nvars_list.append(n_vars)
+            times_list.append(t_end)
+            sat_flags.append(sat)
+>>>>>>> bd3f9d3 (edits)
 
     return nvars_list, times_list, sat_flags
 
@@ -113,9 +127,10 @@ def main():
     try:
         plot_from_results(nvars_list, times_list, sat_flags, out_png)
     except Exception as e:
-        print("Plotting failed:", e)
+        print("Plotting did not work:", e)
 
-    print(f"Wrote results to {outcsv}")
+    print(f"Results to {outcsv}")
 
 if __name__ == "__main__":
     main()
+
