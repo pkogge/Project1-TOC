@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #writing my own csv parser, timing where necessary since it is needed for the graph
+#also did this since calling the underlying helper function was causing some issues so it was easier to just implement my own version, which was pretty simple to write
 def write_results_csv(instances, solver: SatSolver, out_csv: str):
     os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
     nvars_list, times_list, sat_flags = [], [], []
