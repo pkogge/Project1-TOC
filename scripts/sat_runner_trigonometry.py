@@ -95,7 +95,6 @@ def main():
     #using helper given to us
     instances = parse_multi_instance_dimacs(input)
     if not instances:
-        print("No instances parsed. Check the input file.")
         sys.exit(1)
 
     #using my satsolver brute force function
