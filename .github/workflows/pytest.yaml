@@ -44,7 +44,7 @@ jobs:
     - name: Clone private repository using PAT
       run: |
         # Clone using PAT (more reliable than SSH)
-        git clone https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com:pkogge/Project-Private-TOC.git private-repo     
+        git clone https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/pkogge/Project-Private-TOC.git private-repo     
         ls -la private-repo
         cp -r private-repo/tests ./tests
         cp -r private-repo/our_inputs ./our_inputs
