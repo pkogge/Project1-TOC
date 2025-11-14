@@ -60,7 +60,36 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        # iterate over all possible assignments of n variables
+        # try every possible assignment (brute force)
+        all_choices = [False, True]
+    
+        for bits in itertools.product(all_choices, repeat=n_vars):
+            assignment = {}
+            for i in range(n_vars):
+                assignment[i+1] = bits[i]
+
+            is_good = True
+            for clause in clauses:
+                clause_satisfied = False
+
+                for lit in clause:
+                    v = abs(lit)
+                    if lit > 0:
+                        wanted = True
+                    else:
+                        wanted = False
+
+                    if assignment[v] == wanted:
+                        clause_satisfied = True
+                        break
+                if clause_satisfied == False:
+                    is_good = False
+                    break
+            if is_good:
+                return True, assignment
+
+        return False, {}
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
