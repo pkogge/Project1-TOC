@@ -72,17 +72,6 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     of the CSV file just focus on the logic
     """
 
-    def canWalk(self, path, edges):
-        """
-        Checks if you can walk on a path
-        """
-        for i in range(len(path) - 1):
-            first = path[i]
-            second = path[i + 1]
-            if (first, second) not in edges and (second, first) not in edges:
-                return False
-        return True
-
 
     def hamilton_backtracking(
         self, vertices: set, edges: List[Tuple[int]]
@@ -93,38 +82,7 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     def hamilton_bruteforce(
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:
-        finalpath = []
-        finalcycle = []
-        
-        # Find hamiltonian path
-        for permutation in itertools.permutations(list(vertices)):
-            if self.canWalk(list(permutation), edges):
-                finalpath = list(permutation)
-                print(f'hamiltonian: {permutation}')
-                break
-        
-        # Find hamiltonian cycle
-        for permutation in itertools.permutations(list(vertices)):
-            cycle = list(permutation) + [permutation[0]]
-            if self.canWalk(cycle, edges):
-                finalcycle = cycle
-                print(f'hamiltonian cycle: {permutation}')
-                break
-        
-        # Find largest cycle
-        maxlength = 0
-        solved = False
-        for i in range(len(vertices), 0, -1):
-            for combination in itertools.combinations(vertices, i):
-                candidate = list(combination) + [combination[0]]
-                if self.canWalk(candidate, edges):
-                    maxlength = i
-                    solved = True
-                    break
-            if solved:
-                break
-
-        return (len(finalpath) > 0, finalpath, len(finalcycle) > 0, finalcycle, maxlength)
+        pass
 
     def hamilton_simple(
         self, vertices: set, edges: List[Tuple[int]]
