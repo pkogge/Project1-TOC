@@ -57,9 +57,28 @@ class BinPackingAbstractClass(ABC):
             w.writerows(run_results)
         print(f"\nResults written to {temp_result}")
     
-    @abstractmethod
     def binpacking_backtracing(self, bin_capacity:int, clauses:List[int]) -> List[List[int]]:
-        pass
+        """
+        Backtracking approach to find all subsets that sum to bin_capacity.
+        """
+        results = []
+        def backtrack(start: int, current_sum: int, current_bin: List[int]):
+            if current_sum == bin_capacity:
+                results.append(sorted(current_bin[:]))
+                return
+            
+            if current_sum > bin_capacity:
+                return
+            
+            for i in range(start, len(clauses)):
+                item = clauses[i]
+                if current_sum + item <= bin_capacity:
+                    current_bin.append(item)
+                    backtrack(i + 1, current_sum + item, current_bin)
+                    current_bin.pop()
+        
+        backtrack(0, 0, [])
+        return results
 
     @abstractmethod
     def binpacking_bruteforce(self, bin_capacity:int, clauses:List[int]) -> List[List[int]]:

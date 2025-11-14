@@ -5,6 +5,13 @@ description = "Project 1 for Theory of Computing"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "matplotlib>=3.10.7",
     "pandas>=2.3.2",
     "pytest>=8.4.2",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["module_tests"]
+python_files = ["tests.py"]
+python_classes = ["Test"]
+python_functions = ["test"]

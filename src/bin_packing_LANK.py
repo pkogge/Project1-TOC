@@ -29,7 +29,7 @@ instance_id,bin_capacity,bins_array,method,time_taken
 
 from typing import List
 
-from src.helpers.bin_packing_helper import BinPackingAbstractClass
+from src.helpers.bin_packing_helper_LANK import BinPackingAbstractClass
 
 
 class BinPacking(BinPackingAbstractClass):
@@ -41,10 +41,12 @@ class BinPacking(BinPackingAbstractClass):
     of the CSV file just focus on the logic
     """
 
+    """
     def binpacking_backtracing(
         self, bin_capacity: int, clauses: List[int]
     ) -> List[List[int]]:
         pass
+    """
 
     def binpacking_bruteforce(
         self, bin_capacity: int, clauses: List[int]

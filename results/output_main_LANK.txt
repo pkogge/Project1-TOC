@@ -1,0 +1,3 @@
+Parsed 2 instances from /Users/yohannesmariam/Developer/school/sem5/cse30151/Project1-TOC/input/binpacking.txt
+
+Results written to /Users/yohannesmariam/Developer/school/sem5/cse30151/Project1-TOC/results/btracking_binpacking_sat_solver_results.csv
