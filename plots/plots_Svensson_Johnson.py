@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 import os
 
+results_dir = "../results"
 
 for root, dirs, files in os.walk(results_dir):
     for filename in files:
