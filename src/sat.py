@@ -60,7 +60,29 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        #go over all possible assignemnt of n_vars booleans
+        for values in itertools.product([False, True], repeat=n_vars):
+            assignment = {i + 1: val for i, val in enumerate(values)} #turn the tuple into a dict
+
+            all_clauses_ok = True #assume this assignemnt works until we find a bad clause
+            for clause in clauses: #check every clause under this assignment
+                clause_ok = False #start by assuming clause is false
+                for literal in clause: #go through each literal in clause
+                    var_num = abs(literal) #get variable index
+                    var_is_true = assignment[var_num] #truth value of var in current assignment
+                    literal_is_true = var_is_true if literal > 0 else (not var_is_true) #find truth of the literal itself
+                    if literal_is_true: #if literal is true, the whole clause is true
+                        clause_ok = True
+                        break #no need to check other literals in clause
+
+                if not clause_ok: #if clause false, this assignemnt fails
+                    all_clauses_ok = False
+                    break #no need to check the reamining clauses
+
+            if all_clauses_ok: #if every clause was true, we found a satisfying assignment
+                return True, assignment
+
+        return False, {} #if we tried all assignments and none worked, the formula is unsatisfiable
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
