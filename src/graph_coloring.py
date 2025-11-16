@@ -55,12 +55,53 @@ class GraphColoring(GraphColoringAbstractClass):
         of the CSV file just focus on the logic
     """
 
-
     def coloring_backtracking(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass
 
     def coloring_bruteforce(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
-        pass
+        """
+        Brute force: try all possible color assignments until we find a valid one.
+        Returns (True, coloring_list) if found, (False, []) if not.
+        """
+        
+        # get all vertices from edges
+        all_vertices = set()
+        for u, v in edges:
+            all_vertices.add(u)
+            all_vertices.add(v)
+        vertex_list = sorted(list(all_vertices))
+        
+        if not edges:
+            return True, [0] * n_vertices
+
+        num_verts = len(vertex_list)
+        # create mapping from vertex id to position in our list
+        v_to_idx = {}
+        for i, v in enumerate(vertex_list):
+            v_to_idx[v] = i
+
+        # try every possible coloring
+        for assignment in itertools.product(range(k), repeat=num_verts):
+            valid = True
+            
+            # check all edges
+            for u, v in edges:
+                u_color = assignment[v_to_idx[u]]
+                v_color = assignment[v_to_idx[v]]
+                if u_color == v_color:
+                    valid = False
+                    break
+            
+            if valid:
+                # build output array: result[i] is color for vertex (i+1) in input
+                # parser already converted vertices to 0-based, so vertex_id is 0..n_vertices-1
+                result = [0] * n_vertices
+                for i, vertex_id in enumerate(vertex_list):
+                    if vertex_id < n_vertices:
+                        result[vertex_id] = assignment[i]
+                return True, result
+
+        return False, []
 
     def coloring_simple(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass

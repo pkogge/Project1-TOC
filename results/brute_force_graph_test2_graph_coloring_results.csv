@@ -1,0 +1,5 @@
+instance_id,n_vertices,n_edges,k,method,colorable,time_seconds,coloring
+1,6,9,3,BruteForce,YES,0.000038,"[0, 1, 2, 0, 1, 2]"
+2,7,10,2,BruteForce,NO,0.000041,[]
+3,8,12,4,BruteForce,YES,0.000519,"[0, 1, 1, 1, 0, 0, 2, 2]"
+4,5,10,2,BruteForce,NO,0.000009,[]
