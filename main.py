@@ -1,4 +1,4 @@
-from src import entrypoint
+from src import entrypoint_CD
 
 if __name__ == "__main__":
-    entrypoint.main()
+    entrypoint_CD.main()

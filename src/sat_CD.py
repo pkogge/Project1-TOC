@@ -60,7 +60,53 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        
+        # Total number of assignments = 2^n_vars
+        total = 1 << n_vars
+
+        # Loop over every possible assignment encoded as an integer
+        # Example: n_vars = 3 -> (000, 001, 010, ..., 111)
+        # Using a bitmask
+        for mask in range(total):
+
+            # Convert the integer mask to an assignment dict
+            # bit i of mask determines variable (i+1)
+            assignment = {}
+            for i in range(n_vars):
+                # Get the i-th bit: 1 -> True, 0 -> False
+                bit = (mask >> i) & 1
+                assignment[i+1] = bool(bit)
+
+            # Assume this assignment works until we find a failing clause
+            all_clauses_ok = True
+
+            for clause in clauses:
+                # Remove trailing zeros
+                cl = [lit for lit in clause if lit != 0]
+
+                # Check if this clause is satisfied under the current assignment.
+                clause_ok = False
+                for lit in cl:
+                    # Positive literal: lit is True in assignment
+                    if lit > 0 and assignment[lit]:
+                        clause_ok = True
+                        break
+                    # Negative literal: variable must be False
+                    if lit < 0 and not assignment[-lit]:
+                        clause_ok = True
+                        break
+
+                # If this clause fails, no need to check the rest.
+                if not clause_ok:
+                    all_clauses_ok = False
+                    break
+
+            # If this assignment satisfies every clause, we are done
+            if all_clauses_ok:
+                return True, assignment
+
+        # Exhausted all assignments, so UNSAT.
+        return False, {}
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
