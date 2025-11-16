@@ -14,7 +14,7 @@ class HamiltonCycleAbstractClass(ABC):
     def __init__(
         self,
         cnf_file_input_path: str,
-        result_file_name: str = "graph_coloring_results",
+        result_file_name: str = "hamilton_cycle_results",
         results_folder_path: str = RESULTS_FOLDER,
     ):
         self.cnf_file_input_path = cnf_file_input_path

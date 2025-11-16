@@ -197,4 +197,3 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]: #best case is backtrakcing approach 
          return self.hamilton_backtracking(vertices, edges)
-    
