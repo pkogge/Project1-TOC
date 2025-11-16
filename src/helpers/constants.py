@@ -10,7 +10,7 @@ INPUT_FOLDER = os.path.join(BASE_PATH, "input")
 # input_file = "binpacking.txt"
 #input_file = "data_kSAT_VS.cnf"
 input_file = "data_2SAT_VS.cnf"
-#input_file = "data_check1_VS.cnf"
+#input_file = "check1_VS.cnf"
 INPUT_FILE = os.path.join(INPUT_FOLDER, input_file)
 
 

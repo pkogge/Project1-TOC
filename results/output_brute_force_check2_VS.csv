@@ -1,0 +1,21 @@
+instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
+1,3,3,BruteForce,S,1.5292083844542503e-05,"{1: False, 2: True, 3: False}"
+2,2,4,BruteForce,U,3.7080608308315277e-06,{}
+3,4,4,BruteForce,S,2.7080532163381577e-06,"{1: False, 2: False, 3: True, 4: False}"
+4,3,4,BruteForce,U,3.62517312169075e-06,{}
+5,3,2,BruteForce,S,1.6670674085617065e-06,"{1: False, 2: False, 3: True}"
+6,1,2,BruteForce,U,1.125037670135498e-06,{}
+7,4,4,BruteForce,S,5.790963768959045e-06,"{1: True, 2: False, 3: False, 4: True}"
+8,2,4,BruteForce,U,1.9171275198459625e-06,{}
+9,5,4,BruteForce,S,4.20818105340004e-06,"{1: False, 2: True, 3: False, 4: False, 5: False}"
+10,3,6,BruteForce,U,4.416098818182945e-06,{}
+11,3,4,BruteForce,S,3.0419323593378067e-06,"{1: False, 2: True, 3: True}"
+12,4,6,BruteForce,U,6.332993507385254e-06,{}
+13,4,4,BruteForce,S,1.0409858077764511e-06,"{1: False, 2: False, 3: False, 4: False}"
+14,2,3,BruteForce,U,1.7078127712011337e-06,{}
+15,2,1,BruteForce,S,9.168870747089386e-07,"{1: False, 2: True}"
+16,3,8,BruteForce,U,7.041962817311287e-06,{}
+17,5,4,BruteForce,S,1.250067725777626e-06,"{1: False, 2: False, 3: False, 4: False, 5: False}"
+18,3,2,BruteForce,U,2.8330832719802856e-06,{}
+19,3,3,BruteForce,S,1.9997823983430862e-06,"{1: False, 2: True, 3: True}"
+20,4,4,BruteForce,S,1.541106030344963e-06,"{1: False, 2: False, 3: False, 4: True}"

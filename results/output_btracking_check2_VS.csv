@@ -1,0 +1,21 @@
+instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
+1,3,3,BackTracking,S,1.7625046893954277e-05,"{1: True, 2: False, 3: True}"
+2,2,4,BackTracking,U,9.667128324508667e-06,{}
+3,4,4,BackTracking,S,1.3457844033837318e-05,"{1: True, 2: False, 3: True, 4: True}"
+4,3,4,BackTracking,U,8.00006091594696e-06,{}
+5,3,2,BackTracking,S,2.874992787837982e-06,"{1: True, 2: True}"
+6,1,2,BackTracking,U,2.4170149117708206e-06,{}
+7,4,4,BackTracking,S,4.875008016824722e-06,"{1: True, 2: True, 3: True}"
+8,2,4,BackTracking,U,5.00003807246685e-06,{}
+9,5,4,BackTracking,S,7.66250304877758e-05,"{1: True, 2: True, 3: True, 4: True, 5: True}"
+10,3,6,BackTracking,U,9.790994226932526e-06,{}
+11,3,4,BackTracking,S,4.250090569257736e-06,"{1: True, 2: True}"
+12,4,6,BackTracking,U,3.3329706639051437e-06,{}
+13,4,4,BackTracking,S,9.790994226932526e-06,"{1: True, 2: True, 3: False, 4: False}"
+14,2,3,BackTracking,U,4.166038706898689e-06,{}
+15,2,1,BackTracking,S,1.250067725777626e-06,{1: True}
+16,3,8,BackTracking,U,3.1250063329935074e-05,{}
+17,5,4,BackTracking,S,6.166985258460045e-06,"{1: True, 2: True, 3: True, 4: True}"
+18,3,2,BackTracking,U,2.2919848561286926e-06,{}
+19,3,3,BackTracking,S,4.958128556609154e-06,"{1: True, 2: False, 3: True}"
+20,4,4,BackTracking,S,6.58305361866951e-06,"{1: True, 2: True, 3: True, 4: True}"
