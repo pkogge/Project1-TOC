@@ -1,0 +1,4 @@
+instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
+3,4,10,BackTracking,U,1.7447862774133682e-05,{}
+4,4,10,BackTracking,S,1.6802921891212463e-05,"{1: True, 2: True, 3: False, 4: False}"
+5,4,10,BackTracking,S,1.4137011021375656e-05,"{1: False, 2: False, 3: False, 4: False}"
