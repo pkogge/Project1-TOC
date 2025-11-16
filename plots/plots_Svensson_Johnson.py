@@ -15,11 +15,11 @@ for root, dirs, files in os.walk(results_dir):
             color = [] # colors
 
             for index, item in enumerate(csvlist):
-            if index == 0: continue
-            xVals.append(int(item[1]))
-            yVals.append(float(item[5]))
-            if item[4] == 'U': color.append('red')
-            if item[4] == 'S': color.append('green')
+                if index == 0: continue
+                xVals.append(int(item[1]))
+                yVals.append(float(item[5]))
+                if item[4] == 'U': color.append('red')
+                if item[4] == 'S': color.append('green')
 
             plt.scatter(xVals, yVals, c=color)
             plt.xlabel("Number of Instances")
@@ -35,11 +35,11 @@ for root, dirs, files in os.walk(results_dir):
             color = [] # colors
 
             for index, item in enumerate(csvlist):
-            if index == 0: continue
-            xVals.append(int(item[1]))
-            yVals.append(float(item[5]))
-            if item[4] == 'U': color.append('red')
-            if item[4] == 'S': color.append('green')
+                if index == 0: continue
+                xVals.append(int(item[1]))
+                yVals.append(float(item[5]))
+                if item[4] == 'U': color.append('red')
+                if item[4] == 'S': color.append('green')
 
             plt.scatter(xVals, yVals, c=color)
             plt.xlabel("Number of Instances")
