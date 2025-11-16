@@ -57,7 +57,78 @@ class SatSolver(SatSolverAbstractClass):
 
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+            
+
+        def clauseSatisfied(clause, assignment):
+            for literal in clause:
+                var = abs(literal)
+                if var in assignment:
+                    val = assignment[var]
+                    if (literal > 0 and val) or (literal < 0 and not val):
+                        return True
+            return False
+        
+        def clauseUnsatisfied(clause, assignment):
+            for literal in clause:
+                var = abs(literal)
+                if var not in assignment:
+                    return False  
+                val = assignment[var]
+                if (literal > 0 and val) or (literal < 0 and not val):
+                    return False  
+            return True
+                
+
+        def final():
+            variationsTriedStack = []
+            assignment = {}
+            allVars = sorted({abs(lit) for clause in clauses for lit in clause})
+
+            while True:
+                
+                good = 0
+                for clause in clauses:
+                    if clauseSatisfied(clause, assignment):
+                        good += 1
+
+                if good == len(clauses):
+                    return (True, assignment)
+                
+                if any(clauseUnsatisfied(clause, assignment) for clause in clauses):
+
+                    backtracked = False
+                    
+                    while variationsTriedStack:
+                        var, tried = variationsTriedStack.pop()
+                        if var in assignment:
+                            del assignment[var]
+                        if len(tried) < 2: 
+                            otherVal = not tried[0]
+                            tried.append(otherVal)
+                            assignment[var] = otherVal
+                            variationsTriedStack.append((var, tried))
+                            backtracked = True
+                            break
+                    if not backtracked:
+                        return (False, {})
+                    
+                unassigned = [v for v in allVars if v not in assignment]
+                if not unassigned:
+                    good = 0
+                    for clause in clauses:
+                        if clauseSatisfied(clause, assignment):
+                            good += 1
+                    if good == len(clauses):
+                        return (True, assignment)
+                    else: 
+                        return (False, {})
+                        
+                var = unassigned[0]
+                assignment[var] = True
+                variationsTriedStack.append((var, [True]))            
+
+        return final()
+
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         satisfiable = False
