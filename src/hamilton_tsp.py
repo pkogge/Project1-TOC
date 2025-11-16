@@ -61,3 +61,55 @@ def parse_weighted_graph_file(filename: str) -> List[Dict]:
         
     return all_graphs
 
+
+# Helper & Algorithm Functions
+def _build_adj_list(vertices: Set[int], edges: List[Tuple[int, int, int]]) -> Dict[int, Dict[int, int]]:
+    #Helper function to build a weighted adjacency list
+    #for efficient lookups.
+    adj_list = {v: {} for v in vertices}
+    for u, v, weight in edges:
+        adj_list[u][v] = weight
+        adj_list[v][u] = weight
+    return adj_list
+
+def tsp_bruteforce(
+    vertices: Set[int], edges: List[Tuple[int, int, int]]
+) -> Tuple[float, List[int]]:
+    
+   # Solves TSP using Brute Force.
+   # Checks every possible permutation of vertices.
+   
+    adj_list = _build_adj_list(vertices, edges)
+    start_node = 1
+    other_nodes = [v for v in vertices if v != start_node]
+    
+    min_weight = float('inf')
+    best_cycle = None
+
+    for p in itertools.permutations(other_nodes): #go through all permuatiosn
+        current_weight = 0
+        current_node = start_node
+        is_valid_cycle = True
+        
+        for next_node in p:
+            if next_node in adj_list[current_node]:
+                current_weight += adj_list[current_node][next_node]
+                current_node = next_node
+            else:
+                is_valid_cycle = False
+                break
+        
+        if not is_valid_cycle:
+            continue
+            
+        if start_node in adj_list[current_node]:
+            current_weight += adj_list[current_node][start_node]
+        else:
+            is_valid_cycle = False
+            continue
+
+        if current_weight < min_weight:
+            min_weight = current_weight
+            best_cycle = [start_node] + list(p) + [start_node]
+
+    return min_weight, best_cycle #return bruteforce results
