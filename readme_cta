@@ -2,15 +2,13 @@ Project x Readme Team cta
 Version 1 9/11/24
 A single copy of this template should be filled out and submitted with each project submission, regardless of the number of students on the team. It should have the name readme_”teamname”
 Also change the title of this template to “Project x Readme Team xxx”
-1	Team Name: 
-cta
-2	Team members names and netids:
-Team name: cta
+1	Team Name: cta
+2	Team members names and netids
 Net ids: 
--	cta
--	breh
+-	Chau Ta: cta
+-	Bae Rae: breh
 3	Overall project attempted, with sub-projects:
-SAT
+SAT;
 -	Bruteforce
 -	Backtracking
 4	Overall success of the project: Both SAT solvers work. 
@@ -20,13 +18,16 @@ SAT
 
 File/folder Name	File Contents and Use
 Code Files
-	
+src/sat.py	SatSolver class with implemented sat_brutefroce and sat_backtrack
+src/helpers/sat_solver_helper.py 	Read file, config problems, run solvers, and save results 
 Test Files
-	
+input/cnffile.cnf	test cases for CNF
 Output Files
-	
+result/brute_force_cnffile_sat_solver_results.csv
+result/btracking_cnffile_sat_solver_results.csv	
 Plots (as needed)
-	
+backtrack_graph.png	Time taken vs number of clauses
+bruteforce_graph.png	Time taken vs number of clauses
 
 8	Programming languages used, and associated libraries:
 -	Python, intertools, and typing 
@@ -51,8 +52,7 @@ In the test, backtrack was much faster than brute force. Therefore, we know that
 For the testcases provided in the Github, both backtrack and brute force was able to solve the problem as consistent with the solution. They both had similar run-time, which is expected for low number of variables.
 For the special testcase with many variables. Backtrack was much faster than brute force by pruning early.
 14	How team was organized:
-Both of us brainstorm how to implement the algorithm overall. Bae looked at how the file is parsed and implement helper functions, while I implement the main functions. 
-15	What you might do differently if you did the project again
-We would divide the work more differently so that we can learn how all the files work
+Both of us brainstorm how to implement the algorithm overall. Bae looked at how the file is parsed and implement helper functions, while Chau implement the main algorithm for solving SAT. 
+15	What you might do differently if you did the project again: divide up the work so that each person do a solver function instead of helpers vs main functions
 16	Any additional material:
 
