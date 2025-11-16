@@ -55,43 +55,41 @@ class SatSolver(SatSolverAbstractClass):
         of the CSV file just focus on the logic
     """
 
-
-    def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+    def sat_backtracking(self, n_vars: int, clauses: List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         stack = []
-        assignment = [None] * (n_vars+1)
+        assignment = [None] * (n_vars + 1)
 
         while True:
-
             conflict = False
             all_sat = True
 
+            # Check all clauses under the current partial assignment
             for clause in clauses:
                 sat_clause = False
                 unassigned = False
 
                 for literal in clause:
-
                     value = assignment[abs(literal)]
 
                     if value is None:
                         unassigned = True
-                    elif value and literal > 0:
+                    elif literal > 0 and value:
                         sat_clause = True
                         break
                     elif literal < 0 and (not value):
                         sat_clause = True
                         break
 
-                    if not sat_clause:
-                        all_sat = False
-                        if not unassigned:
-                            conflict = True
-                            break
-                
-            if sat_clause is True:
+                # After checking all literals in this clause
+                if not sat_clause:
+                    all_sat = False
+                    if not unassigned:
+                        conflict = True
+                        break
 
+            # If every clause is satisfied
+            if all_sat:
                 result = {}
-
                 i = 1
                 while i <= n_vars:
                     if assignment[i] is None:
@@ -101,38 +99,40 @@ class SatSolver(SatSolverAbstractClass):
                     i += 1
                 return True, result
 
-            if conflict is True:
-
+            # Conflict: need to backtrack
+            if conflict:
                 while stack:
                     var, tried_flag = stack.pop()
-
                     assignment[var] = None
 
                     if tried_flag == 0:
+
                         assignment[var] = False
                         stack.append((var, 1))
                         break
+                    
+                else:
 
-                    else:
-                        return False, {}
+                    return False, {}
 
                 continue
-            
+
+            # Continue down tree
             next_var = None
-
             i = 1
-
             while i <= n_vars:
-
                 if assignment[i] is None:
                     next_var = i
                     break
                 i += 1
+
             if next_var is None:
+
                 return False, {}
-            
+
             assignment[next_var] = True
             stack.append((next_var, 0))
+
 
                 
 
@@ -173,7 +173,6 @@ class SatSolver(SatSolverAbstractClass):
                     break
 
             if formula_satisfied:
-                # found satisfying assignment
                 return True, assignment
 
         # no satisfying assignment exists
