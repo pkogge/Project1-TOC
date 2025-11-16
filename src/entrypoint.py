@@ -26,7 +26,7 @@ def main():
         solver = GraphColoring(INPUT_FILE)
     
     if solver:
-        solver.run()
+        return solver.run()
 
 
     

@@ -6,7 +6,9 @@ CONFIG_FOLDER_PATH = os.path.join(BASE_PATH, "configuration")
 CONFIGURATION_FILE_PATH = os.path.join(CONFIG_FOLDER_PATH, "student_config.json")
 RESULTS_FOLDER = os.path.join(BASE_PATH, "results")
 INPUT_FOLDER = os.path.join(BASE_PATH, "input")
-input_file = "cnffile.cnf"
+input_file = "testSAT.cnf"
+# input_file = "kSAT.cnf"
+# input_file = "cnffile.cnf"
 # input_file = "binpacking.txt"
 INPUT_FILE = os.path.join(INPUT_FOLDER, input_file)
 
