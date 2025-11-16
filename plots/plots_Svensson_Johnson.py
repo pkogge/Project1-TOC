@@ -1,44 +1,49 @@
 import matplotlib.pyplot as plt
 import csv
+import os
 
-# bruteforce 
-with open("brute_force_check_SAT_Svensson-Johnson_sat_solver_results.csv") as csvfile:
-    csvlist = list(csv.reader(csvfile))
 
-xVals = [] # number of instances
-yVals = [] # timing
-color = [] # colors
+for root, dirs, files in os.walk(results_dir):
+    for filename in files:
+        full_path = os.path.join(root, filename)
+        if "brute_force" in filename:
+            with open(full_path) as csvfile:
+                csvlist = list(csv.reader(csvfile))
 
-for index, item in enumerate(csvlist):
-  if index == 0: continue
-  xVals.append(int(item[1]))
-  yVals.append(float(item[5]))
-  if item[4] == 'U': color.append('red')
-  if item[4] == 'S': color.append('green')
+            xVals = [] # number of instances
+            yVals = [] # timing
+            color = [] # colors
 
-plt.scatter(xVals, yVals, c=color)
-plt.xlabel("Number of Instances")
-plt.ylabel("Time (s)")
-plt.title("Brute Force")
-plt.show()
+            for index, item in enumerate(csvlist):
+            if index == 0: continue
+            xVals.append(int(item[1]))
+            yVals.append(float(item[5]))
+            if item[4] == 'U': color.append('red')
+            if item[4] == 'S': color.append('green')
 
-# backtracking
-with open("btracking_check_SAT_Svensson-Johnson_sat_solver_results.csv") as csvfile:
-    csvlist = list(csv.reader(csvfile))
+            plt.scatter(xVals, yVals, c=color)
+            plt.xlabel("Number of Instances")
+            plt.ylabel("Time (s)")
+            plt.title("Brute Force")
+            plt.show()
 
-xVals = [] # number of instances
-yVals = [] # timing
-color = [] # colors
+        if "btracking" in filename:
+            with open(full_path) as csvfile:
+                csvlist = list(csv.reader(csvfile))
+            xVals = [] # number of instances
+            yVals = [] # timing
+            color = [] # colors
 
-for index, item in enumerate(csvlist):
-  if index == 0: continue
-  xVals.append(int(item[1]))
-  yVals.append(float(item[5]))
-  if item[4] == 'U': color.append('red')
-  if item[4] == 'S': color.append('green')
+            for index, item in enumerate(csvlist):
+            if index == 0: continue
+            xVals.append(int(item[1]))
+            yVals.append(float(item[5]))
+            if item[4] == 'U': color.append('red')
+            if item[4] == 'S': color.append('green')
 
-plt.scatter(xVals, yVals, c=color)
-plt.xlabel("Number of Instances")
-plt.ylabel("Time (s)")
-plt.title("Backtracking")
-plt.show()
+            plt.scatter(xVals, yVals, c=color)
+            plt.xlabel("Number of Instances")
+            plt.ylabel("Time (s)")
+            plt.title("Backtracking")
+            plt.show()
+
