@@ -37,10 +37,10 @@ def run_graphs(result_files):
 
     make_plot(bf_csv,
               "Brute Force SAT Solver Timing",
-              "bruteforce_plot.png")
+              "results/bruteforce_plot.png")
 
     make_plot(bt_csv,
               "Backtracking SAT Solver Timing",
-              "btracking_plot.png")
+              "results/btracking_plot.png")
 
     print("[graph] All plots generated.")
