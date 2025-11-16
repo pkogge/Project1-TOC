@@ -176,7 +176,7 @@ def tsp_backtracking(
 if __name__ == "__main__":
     
     #set path name to read cnf file from input
-    INPUT_FILE = 'input/hamilton_input_weighted.cnf'
+    INPUT_FILE = 'input/check2_MCR.cnf'
     
     graphs = parse_weighted_graph_file(INPUT_FILE)
     
