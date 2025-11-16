@@ -39,4 +39,25 @@ def parse_weighted_graph_file(filename: str) -> List[Dict]:
                     'edges': []
                 }
             
-           
+            elif line_type == 'p':
+                # Problem line: p edge num_vertices num_edges
+                if current_graph_data:
+                    num_vertices = int(parts[2])
+                    current_graph_data['vertices'] = set(range(1, num_vertices + 1))
+                        
+            elif line_type == 'e':
+                # Edge line: e v1 v2 weight
+                if current_graph_data:
+                    v1 = int(parts[1])
+                    v2 = int(parts[2])
+                    weight = int(parts[3])
+                    
+                    # Add the edge with its weight
+                    current_graph_data['edges'].append((v1, v2, weight))
+
+    # Add the last graph to the list
+    if current_graph_data:
+        all_graphs.append(current_graph_data)
+        
+    return all_graphs
+
