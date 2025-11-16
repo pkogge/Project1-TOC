@@ -1,0 +1,4 @@
+Instance_ID,Num_Vertices,Num_Edges,Hamiltonian_Path,Hamiltonian_Cycle,Largest_Cycle_Size,Algorithm,Time
+1,6,10,"[1, 6, 4, 3, 5, 2]","[1, 6, 4, 3, 5, 2, 1]",6,0.000025
+2,6,8,None,None,0,0.000009
+3,6,8,None,None,0,0.000008
