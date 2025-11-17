@@ -7,6 +7,7 @@ from src.graph_coloring import GraphColoring
 from src.hamilton_cycle import HamiltonCycleColoring
 from src.helpers.automation_helpers import brief_about_project
 
+
 def main():
     """
     Entry point for the project1_toc package.
@@ -16,7 +17,6 @@ def main():
         brief_about_project()
     selection, sub_problem = parse_config(CONFIGURATION_FILE_PATH)
 
-
     if selection["name"] == ProjectSelection.sat.name:
         solver = SatSolver(INPUT_FILE)
     elif selection["name"] == ProjectSelection.bin_packing.name:
@@ -25,10 +25,6 @@ def main():
         solver = HamiltonCycleColoring(INPUT_FILE)
     elif selection["name"] == ProjectSelection.graph_coloring.name:
         solver = GraphColoring(INPUT_FILE)
-    
+
     if solver:
         solver.run()
-
-
-    
-    

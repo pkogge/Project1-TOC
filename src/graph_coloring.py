@@ -48,22 +48,29 @@ from typing import List, Optional, Dict, Tuple
 
 class GraphColoring(GraphColoringAbstractClass):
     """
-        NOTE: The output of the CSV file should be same as EXAMPLE OUTPUT above otherwise you will loose marks
-        For this you dont need to save anything just make sure to return exact related output.
-        
-        For ease look at the Abstract Solver class and basically we are having the run method which does the saving
-        of the CSV file just focus on the logic
+    NOTE: The output of the CSV file should be same as EXAMPLE OUTPUT above otherwise you will loose marks
+    For this you dont need to save anything just make sure to return exact related output.
+
+    For ease look at the Abstract Solver class and basically we are having the run method which does the saving
+    of the CSV file just focus on the logic
     """
 
-
-    def coloring_backtracking(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
+    def coloring_backtracking(
+        self, n_vertices: int, edges: List[Tuple[int]], k: int
+    ) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass
 
-    def coloring_bruteforce(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
+    def coloring_bruteforce(
+        self, n_vertices: int, edges: List[Tuple[int]], k: int
+    ) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass
 
-    def coloring_simple(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
+    def coloring_simple(
+        self, n_vertices: int, edges: List[Tuple[int]], k: int
+    ) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass
 
-    def coloring_bestcase(self, n_vertices: int, edges: List[Tuple[int]], k:int) -> Tuple[bool, Optional[Dict[int, bool]]]:
+    def coloring_bestcase(
+        self, n_vertices: int, edges: List[Tuple[int]], k: int
+    ) -> Tuple[bool, Optional[Dict[int, bool]]]:
         pass

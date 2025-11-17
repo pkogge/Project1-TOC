@@ -1,19 +1,20 @@
 import os
 from typing import List, Tuple, Any
 
+
 def parse_multi_instance_dimacs(path: str) -> Tuple[str, int, List[List[int]]]:
     """
     Parses a DIMACS-like file containing multiple CNF instances.
     Returns a list of (instance_id, n_vars, clauses) tuples.
     """
 
-    if not os.path.exists(path = path):
+    if not os.path.exists(path=path):
         raise Exception(f"File path: {path} does not exists!!")
 
     instances = []
     with open(path) as f:
         lines = [ln.strip() for ln in f if ln.strip()]
-    
+
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -36,7 +37,9 @@ def parse_multi_instance_dimacs(path: str) -> Tuple[str, int, List[List[int]]]:
             for _ in range(n_clauses):
                 if i >= len(lines) or lines[i].startswith("c "):
                     break
-                clause = [int(x) for x in lines[i].replace(",", " ").split() if x != "0"]
+                clause = [
+                    int(x) for x in lines[i].replace(",", " ").split() if x != "0"
+                ]
                 if clause:
                     clauses.append(clause)
                 i += 1
@@ -84,8 +87,8 @@ def parse_multi_instance_graph(path: str):
             i += 1
 
     return instances
-    
-    
+
+
 def parse_multi_instance_bin_packing(path: str):
     """
     Parse file into list of (instance_id, n_items, item_sizes, bin_capacity)
@@ -100,7 +103,8 @@ def parse_multi_instance_bin_packing(path: str):
         line = [int(line) for line in temp_line.split(" ")]
         instances.append(line)
     return instances
-    
+
+
 def parse_cnf_instances_hamilton(filename):
     instances = []
     current_instance: dict[str, Any] = {}
