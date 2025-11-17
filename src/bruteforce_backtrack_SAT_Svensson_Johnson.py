@@ -58,7 +58,7 @@ class SatSolver(SatSolverAbstractClass):
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
              
-
+        # checks if clause is satisfied with the given assignement. not all variables have to have assignments 
         def clauseSatisfied(clause, assignment):
             for literal in clause:
                 var = abs(literal)
@@ -68,6 +68,7 @@ class SatSolver(SatSolverAbstractClass):
                         return True
             return False
         
+        # checks if clause is unsatisfied with the given assignement
         def clauseUnsatisfied(clause, assignment):
             for literal in clause:
                 var = abs(literal)
@@ -80,9 +81,9 @@ class SatSolver(SatSolverAbstractClass):
                 
 
         def final():
-            variationsTriedStack = []
+            variationsTriedStack = [] # use a stack hold the variations of variables and assignments
             assignment = {}
-            allVars = sorted({abs(lit) for clause in clauses for lit in clause})
+            allVars = sorted({abs(lit) for clause in clauses for lit in clause}) # might be better way time wise to get variables
 
             while True:
                 
@@ -91,25 +92,25 @@ class SatSolver(SatSolverAbstractClass):
                     if clauseSatisfied(clause, assignment):
                         good += 1
 
-                if good == len(clauses):
+                if good == len(clauses): #if all clauses are true
                     return (True, assignment)
                 
-                if any(clauseUnsatisfied(clause, assignment) for clause in clauses):
+                if any(clauseUnsatisfied(clause, assignment) for clause in clauses): # if any are false backtrack to changing the assignments of variables
 
                     backtracked = False
                     
-                    while variationsTriedStack:
+                    while variationsTriedStack: 
                         var, tried = variationsTriedStack.pop()
                         if var in assignment:
-                            del assignment[var]
-                        if len(tried) < 2: 
+                            del assignment[var] # take back that assignment becaise it didnt work
+                        if len(tried) < 2: # if true and false in not both in tried
                             otherVal = not tried[0]
-                            tried.append(otherVal)
-                            assignment[var] = otherVal
+                            tried.append(otherVal) 
+                            assignment[var] = otherVal #assign the other not tried
                             variationsTriedStack.append((var, tried))
                             backtracked = True
                             break
-                    if not backtracked:
+                    if not backtracked: # if stack empty and all variations have been tried and not satisfied
                         return (False, {})
                     
                 unassigned = [v for v in allVars if v not in assignment]
@@ -118,13 +119,13 @@ class SatSolver(SatSolverAbstractClass):
                     for clause in clauses:
                         if clauseSatisfied(clause, assignment):
                             good += 1
-                    if good == len(clauses):
+                    if good == len(clauses): #if all clauses are true
                         return (True, assignment)
                     else: 
                         return (False, {})
                         
-                var = unassigned[0]
-                assignment[var] = True
+                var = unassigned[0] #get a new variable to assign
+                assignment[var] = True # try true first
                 variationsTriedStack.append((var, [True]))            
 
         return final()
