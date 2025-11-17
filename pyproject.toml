@@ -5,6 +5,8 @@ description = "Project 1 for Theory of Computing"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "matplotlib>=3.10.7",
+    "networkx>=3.5",
     "pandas>=2.3.2",
     "pytest>=8.4.2",
 ]
