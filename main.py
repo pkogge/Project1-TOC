@@ -1,4 +1,4 @@
-from src import entrypoint
+from src import entrypoint_YouAreMine
 
 if __name__ == "__main__":
-    entrypoint.main()
+    entrypoint_YouAreMine.main()

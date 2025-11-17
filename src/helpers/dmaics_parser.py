@@ -20,13 +20,16 @@ def parse_multi_instance_dimacs(path: str) -> Tuple[str, int, List[List[int]]]:
         if line.startswith("c "):
             # Example: c 3 2 ?
             parts = line.split()
-            instance_id = parts[1] if len(parts) > 1 else str(len(instances) + 1)
+            instance_id = parts[1]
             i += 1
             if i >= len(lines):
                 break
             # Expect next line: p cnf n_vars n_clauses
-            if not lines[i].startswith("p cnf"):
-                raise ValueError(f"Expected 'p cnf' after {line}")
+            while i < len(lines) and not lines[i].startswith("p cnf"):
+                i += 1
+            if i >= len(lines):
+                break
+            
             _, _, n_vars_str, n_clauses_str = lines[i].split()
             n_vars = int(n_vars_str)
             n_clauses = int(n_clauses_str)
@@ -34,9 +37,19 @@ def parse_multi_instance_dimacs(path: str) -> Tuple[str, int, List[List[int]]]:
             clauses = []
             # Read next n_clauses lines (allow commas)
             for _ in range(n_clauses):
-                if i >= len(lines) or lines[i].startswith("c "):
+                if i >= len(lines):
                     break
-                clause = [int(x) for x in lines[i].replace(",", " ").split() if x != "0"]
+                if lines[i].startswith("c "):
+                    i += 1
+                    continue
+
+                parts = lines[i].replace(",", " ").split()
+                clause = []
+
+                for x in parts:
+                    lit = int(x)
+                    if lit != 0:
+                        clause.append(lit)
                 if clause:
                     clauses.append(clause)
                 i += 1

@@ -42,7 +42,6 @@ instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
 
 from typing import List, Tuple, Dict
 from src.helpers.sat_solver_helper import SatSolverAbstractClass
-import itertools
 
 
 class SatSolver(SatSolverAbstractClass):
@@ -60,7 +59,37 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        total = 1 << n_vars
+
+        for mask in range(total):
+            assignment = {}
+            for i in range(n_vars):
+                bit = (mask >> i) & 1
+                assignment[i+1] = bool(bit)
+
+            all_clauses = True
+
+            for clause in clauses:
+                clause_tot = [literal for literal in clause if literal != 0]
+
+                clause_now = False
+                for literal in clause_tot:
+                    if literal > 0 and assignment[literal]:
+                        clause_now = True
+                        break
+                    if literal < 0 and not assignment[-literal]:
+                        clause_now = True
+                        break
+                
+                if not clause_now:
+                    all_clauses = False
+                    break
+
+            if all_clauses:
+                return True, assignment
+                
+        return False, {}
+        
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
