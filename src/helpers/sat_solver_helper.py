@@ -57,6 +57,7 @@ class SatSolverAbstractClass(ABC):
                         "satisfiable", "time_seconds", "solution"])
             w.writerows(run_results)
         print(f"\nResults written to {temp_result}")
+        return temp_result
     
     @abstractmethod
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
@@ -75,6 +76,7 @@ class SatSolverAbstractClass(ABC):
         pass
 
     def run(self):
+        generated_files = []
         results = []
         
         for inst_id, n_vars, clauses in self.solution_instances:
@@ -90,9 +92,11 @@ class SatSolverAbstractClass(ABC):
                             str(bt_assign)])
         
         if SubProblemSelection.brute_force in self.sub_problems:
-            self.save_results(results, SubProblemSelection.brute_force.name)
+            path = self.save_results(results, SubProblemSelection.brute_force.name)
+            generated_files.append(path)
             results = []
 
+        results = []
         for inst_id, n_vars, clauses in self.solution_instances:
 
             if SubProblemSelection.btracking in self.sub_problems:
@@ -106,7 +110,8 @@ class SatSolverAbstractClass(ABC):
                             str(bt_assign)])
         
         if SubProblemSelection.btracking in self.sub_problems:
-            self.save_results(results, SubProblemSelection.btracking.name)
+            path = self.save_results(results, SubProblemSelection.btracking.name)
+            generated_files.append(path)
             results = []
 
         for inst_id, n_vars, clauses in self.solution_instances:
@@ -143,12 +148,4 @@ class SatSolverAbstractClass(ABC):
             results = []
 
 
-
-        
-
-
-    
-    
-
-
-    
+        return generated_files
