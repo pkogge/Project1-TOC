@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from src.helpers.dmaics_parser import parse_multi_instance_dimacs
-from src.helpers.constants import RESULTS_FOLDER, CONFIGURATION_FILE_PATH
+from src.helpers.constants_GOODY import RESULTS_FOLDER, CONFIGURATION_FILE_PATH
 from typing import List, Tuple, Dict, Any
 import json
 import csv

@@ -1,7 +1,7 @@
 from src.helpers.project_selection_enum import ProjectSelection, SubProblemSelection
 import json
 from typing import List
-from src.helpers.constants import CONFIGURATION_FILE_PATH
+from src.helpers.constants_GOODY import CONFIGURATION_FILE_PATH
 
 def construct_config_json(project_value: ProjectSelection, sub_probs: List[SubProblemSelection]):
     project = {"Selection" : {
