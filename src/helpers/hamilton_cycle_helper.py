@@ -5,7 +5,7 @@ import time
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Tuple
 
-from src.helpers.constants import CONFIGURATION_FILE_PATH, RESULTS_FOLDER
+from src.helpers.constants_GOODY import CONFIGURATION_FILE_PATH, RESULTS_FOLDER
 from src.helpers.dmaics_parser import parse_cnf_instances_hamilton
 from src.helpers.project_selection_enum import ProjectSelection, SubProblemSelection
 

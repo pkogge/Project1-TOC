@@ -3,12 +3,12 @@ import os
 
 BASE_PATH = os.path.abspath(os.getcwd())
 CONFIG_FOLDER_PATH = os.path.join(BASE_PATH, "configuration")
-CONFIGURATION_FILE_PATH = os.path.join(CONFIG_FOLDER_PATH, "student_config.json")
+CONFIGURATION_FILE_PATH = os.path.join(CONFIG_FOLDER_PATH, "student_config_GOODY.json")
 RESULTS_FOLDER = os.path.join(BASE_PATH, "results")
 INPUT_FOLDER = os.path.join(BASE_PATH, "input")
-# input_file = "cnffile.cnf"
+input_file = "check_2SAT_GOODY.cnf"
 # input_file = "binpacking.txt"
-input_file = "hamilton_input.cnf"
+# input_file = "hamilton_input.cnf"
 INPUT_FILE = os.path.join(INPUT_FOLDER, input_file)
 
 
