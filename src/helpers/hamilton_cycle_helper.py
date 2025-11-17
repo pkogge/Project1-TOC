@@ -14,7 +14,7 @@ class HamiltonCycleAbstractClass(ABC):
     def __init__(
         self,
         cnf_file_input_path: str,
-        result_file_name: str = "graph_coloring_results",
+        result_file_name: str = "hamilton_cycle_results",
         results_folder_path: str = RESULTS_FOLDER,
     ):
         self.cnf_file_input_path = cnf_file_input_path
@@ -56,7 +56,7 @@ class HamiltonCycleAbstractClass(ABC):
         file_name_only, ext = os.path.splitext(file_name)
         temp_result = os.path.join(
             self.results_folder_path,
-            f"{sub_problem}_{file_name_only}_{self.result_file_name}.csv",
+            f"output_{sub_problem}_{file_name_only}_{self.result_file_name}.csv",
         )
         with open(temp_result, "w", newline="") as f:
             w = csv.writer(f)

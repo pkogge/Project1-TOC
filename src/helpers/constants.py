@@ -8,7 +8,7 @@ RESULTS_FOLDER = os.path.join(BASE_PATH, "results")
 INPUT_FOLDER = os.path.join(BASE_PATH, "input")
 # input_file = "cnffile.cnf"
 # input_file = "binpacking.txt"
-input_file = "hamilton_input.cnf"
+input_file = "check_MCR.cnf"
 INPUT_FILE = os.path.join(INPUT_FOLDER, input_file)
 
 
