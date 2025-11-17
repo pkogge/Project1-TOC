@@ -60,7 +60,38 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        import time
+        start = time.perf_counter()
+        
+        for pattern in itertools.product([False, True], repeat=n_vars):
+            
+            #Creating mapping for True and False variable assignment
+            choice = {i + 1: pattern[i] for i in range(n_vars)}
+            
+            allClauseGood = True
+
+            #Checking/Iterating through the clauses
+            for clause in clauses:
+                clauseGood = False
+                #Checking/Iterating through literals
+                for litty in clause:
+                    varid = abs(litty)
+                    val = choice[varid]
+
+                    #if litty>0 then val should be true, if litty<0 then val should be false
+                    if (litty > 0 and val is True) or (litty < 0 and val is False):
+                        clauseGood = True
+                        break
+                
+                if not clauseGood:
+                    allClauseGood = False
+                    break
+            if allClauseGood:
+                self.last_runtime = time.perf_counter() - start
+                return True, choice
+        self.last_runime = time.perf_counter() - start
+        return False, {}
+                    
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
