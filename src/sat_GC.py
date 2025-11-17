@@ -59,8 +59,50 @@ class SatSolver(SatSolverAbstractClass):
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
 
-    def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+
+    def sat_bruteforce(self, n_vars: int, clauses: List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+        """
+        Arg:
+        n_vars = The number of variables in the SAT problem.
+        clauses = A list of clauses where each clause is a list of literals (variables or their negations).
+
+        Returns:
+        A tuple where the first value is a boolean showing whether a solution exists,
+        and the second value is a dictionary of variable assignments that satisfy the formula, or an empty one if no solution exists.
+        """
+        total_assignments = 2 ** n_vars
+
+        for i in range(total_assignments):
+            # variable 1 uses the highest bit, variable n uses the lowest bit.
+            assignment = {}
+            for j in range(n_vars):
+                bit_index = n_vars - 1 - j   # make var 1 change slowest, var n fastest
+                assignment[j + 1] = bool((i >> bit_index) & 1)
+
+            # Check if this assignment satisfies every clause
+            all_ok = True
+            for clause in clauses:
+                clause_ok = False
+
+                for literal in clause:
+                    var = abs(literal)
+                    val = assignment[var]
+
+                    # positive literal: needs variable True
+                    # negative literal: needs variable False
+                    if (literal > 0 and val) or (literal < 0 and not val):
+                        clause_ok = True
+                        break
+
+                if not clause_ok:
+                    all_ok = False
+                    break
+
+            if all_ok:
+                return True, assignment
+
+        # None of the assignments worked
+        return False, {}
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
