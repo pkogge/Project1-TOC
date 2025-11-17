@@ -55,15 +55,71 @@ class SatSolver(SatSolverAbstractClass):
         of the CSV file just focus on the logic
     """
 
-
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        for bits in itertools.product([False, True], repeat=n_vars):
+            assignment = {i+1: bits[i] for i in range(n_vars)}
+            ok = True
+            for clause in clauses:
+                clause_sat = False
+                for x in clause:
+                    if x == 0:
+                        continue
+                    var = abs(x)
+                    val = assignment.get(var, False)
+                    if (x>0 and val) or (x<0 and not val):
+                        clause_sat = True
+                        break
+                if not clause_sat:
+                    ok = False
+                    break
+            if ok:
+                return True, assignment
+        return False, {}
+
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        def evaluate(assignment: Dict[int, bool]) -> Tuple[bool, int]:
+            count = 0 #running counter
+
+            for clause in clauses: #iterates over clauses and assumes false
+                satisfied = False
+                
+                for lit in clause: #check each literal in clause
+                    var = abs(lit)
+                    val = assignment[var]
+                    if (lit > 0 and val) or (lit < 0 and not val): #checks if satisfied
+                        satisfied = True
+                        break
+
+                if satisfied:
+                    count += 1
+                else:
+                    return False, count
+
+            return True, count
+
+        best_satisfied = -1 #keeps track of best so far
+        best_assignment: Dict[int, bool] = {}
+
+        for mask in range(1 << n_vars): #try every possible assignment
+            assignment = {}
+
+            for v in range(1, n_vars + 1):
+                assignment[v] = bool(mask & (1 << (v - 1)))
+
+            is_sat, sat_count = evaluate(assignment)
+
+            if is_sat: #if good, return
+                return True, assignment
+
+            if sat_count > best_satisfied: #if not, save the best so far
+                best_satisfied = sat_count
+                best_assignment = assignment.copy()
+
+        return False, best_assignment #if nothing good, return best partial
 
     def sat_simple(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
