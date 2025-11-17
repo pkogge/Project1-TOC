@@ -82,7 +82,47 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     def hamilton_bruteforce(
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:
-        pass
+
+        # Initialize return values
+        path = []
+        cycle = []
+        path_exists = False
+        cycle_exists = False
+        largest = 0
+
+        # Create adjacency matrix to represent the graph, easy lookup
+        adj_list = {v: set() for v in vertices}
+        for u, v in edges:
+            adj_list[u].add(v)
+            adj_list[v].add(u)
+        
+        # Generate all permutations of vertices to check for Hamiltonian Path and Cycle
+        # This line of code does all the heavy lifting
+        for perm in itertools.permutations(vertices):
+            # Check for Hamiltonian Path
+            # If at any point a vertex does not directly connect to the next one in the permutation, 
+            # this is not a Hamiltonian path.
+            is_path = True
+            for i in range(len(perm) - 1):
+                if perm[i + 1] not in adj_list[perm[i]]:
+                    is_path = False
+                    break
+            
+            if is_path:
+                # Save Hamiltonian Path
+                path_exists = True
+                path = list(perm)
+
+                # Check for Hamiltonian Cycle
+                # A Hamiltonian Cycle exists if the first and last vertices in the path are connected
+                if perm[0] in adj_list[perm[-1]]:
+                    cycle_exists = True
+                    cycle = list(perm) + [perm[0]]
+
+                largest = len(perm)
+                break  # Stop after finding the first Hamiltonian Path/Cycle
+                
+        return (path_exists, path, cycle_exists, cycle, largest)
 
     def hamilton_simple(
         self, vertices: set, edges: List[Tuple[int]]
