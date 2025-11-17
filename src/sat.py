@@ -60,10 +60,43 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        max_combos = 2**n_vars                              # total number of assignments = 2^n
+
+        for num in range(max_combos):                       # go through every possible combo 
+            assignment = {}
+            for i in range(n_vars): 
+                assignment[i+1] = bool((num>>i)&1)          # change into 0 or one T/F 
+
+            satisfied = True                                # assume satisfied first 
+
+            for clause in clauses:                          # check each clause under current assignmet 
+                clause_satisfied = False                    # assume false first 
+            
+                for literal in clause: 
+                    var = abs(literal) 
+                    val = assignment[var] 
+                    if literal < 0: 
+                        val = not val
+                    if val: 
+                        # found something that makes it true 
+                        clause_satisfied = True  
+                        break 
+                if not clause_satisfied: 
+                    # once false all false 
+                    satisfied = False 
+                    break 
+            
+            # found a satisfying assignment for all clauses 
+            if satisfied: 
+                return True, assignment
+        
+        # if after everything still false then it is unsatisfiable 
+        return False, {}
+
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
 
     def sat_simple(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        pass 
+
