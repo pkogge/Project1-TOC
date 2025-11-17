@@ -1,7 +1,8 @@
 {"Project Configuration": 
 	{"Selection": 
 		{"name": "sat", "value": "SAT"}, 
-		"Sub Problem": [{"name": "brute_force", "value": "Brute Force"}]
+		"Sub Problem": [{"name": "brute_force", "value": "Brute Force"}, 
+			{"name": "best_case", "value": "Best Case"}]
 	}
 
 }
