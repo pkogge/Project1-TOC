@@ -32,3 +32,66 @@ e 2 6
 e 3 4
 e 3 6
 e 4 6
+
+# Instance 4: 7 vertices, Hamiltonian path exists
+c INSTANCE 4
+p edge 7 10
+e 1 5
+e 2 7
+e 3 4
+e 4 5
+e 5 2
+e 6 7
+e 1 7
+e 2 6
+e 3 5
+e 4 7
+e 7 3
+
+# Instance 5: 8 vertices, no Hamiltonian path (disconnected)
+c INSTANCE 5
+p edge 8 7
+e 1 6
+e 2 8
+e 3 4
+e 5 6
+e 6 7
+e 6 2
+e 7 8
+e 8 5
+e 8 3
+
+# Instance 6: 9 vertices, Hamiltonian path exists
+c INSTANCE 6
+p edge 9 12
+e 1 5
+e 5 2
+e 2 3
+e 3 4
+e 4 5
+e 5 6
+e 6 7
+e 7 8
+e 8 9
+e 1 9
+e 2 8
+e 3 7
+e 4 6
+
+# Instance 7: 10 vertices, no Hamiltonian path
+c INSTANCE 7
+p edge 10 9
+e 1 2
+e 1 3
+e 1 4
+e 1 5
+e 1 6
+e 1 7
+e 1 8
+e 1 9
+e 1 10
+e 5 3
+e 7 2
+e 2 4
+e 7 1
+

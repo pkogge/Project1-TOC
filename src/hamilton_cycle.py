@@ -76,11 +76,14 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         """
         Checks if you can walk on a path
         """
+        # go through each consecutive pair in the path
         for i in range(len(path) - 1):
             first = path[i]
             second = path[i + 1]
+            # check if there's an edge between them
             if (first, second) not in edges and (second, first) not in edges:
-                return False
+                return False  # if not, can't walk this path
+        # if all pairs are connected, path is valid
         return True
 
 
@@ -93,37 +96,42 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     def hamilton_bruteforce(
         self, vertices: set, edges: List[Tuple[int]]
     ) -> Tuple[bool, List[int], bool, List[int], int]:
-        finalpath = []
-        finalcycle = []
-        
-        # Find hamiltonian path
+        finalpath = []  # will hold the hamiltonian path if found
+        finalcycle = []  # will hold the hamiltonian cycle if found
+
+        # try every permutation to find a hamiltonian path
         for permutation in itertools.permutations(list(vertices)):
             if self.canWalk(list(permutation), edges):
                 finalpath = list(permutation)
                 print(f'hamiltonian path: {permutation}')
-                break
-        
-        # Find hamiltonian cycle
+                break  # stop after finding one
+
+        # try every permutation to find a hamiltonian cycle
         for permutation in itertools.permutations(list(vertices)):
             cycle = list(permutation) + [permutation[0]]
             if self.canWalk(cycle, edges):
                 finalcycle = cycle
                 print(f'hamiltonian cycle: {permutation}')
-                break
-        
-        # Find largest cycle
-        maxlength = 0
+                break  # stop after finding one
+
+
+        # check for the largest cycle by trying all permutations of all subsets
+        maxlength = 0  # store the size of the largest cycle found
         solved = False
         for i in range(len(vertices), 0, -1):
             for combination in itertools.combinations(vertices, i):
-                candidate = list(combination) + [combination[0]]
-                if self.canWalk(candidate, edges):
-                    maxlength = i
-                    solved = True
+                for perm in itertools.permutations(combination):
+                    candidate = list(perm) + [perm[0]]
+                    if self.canWalk(candidate, edges):
+                        maxlength = i
+                        solved = True
+                        break  # found a cycle of this length
+                if solved:
                     break
             if solved:
-                break
+                break  # no need to check smaller sizes
 
+        # return results: path exists, path, cycle exists, cycle, largest cycle size
         return (len(finalpath) > 0, finalpath, len(finalcycle) > 0, finalcycle, maxlength)
 
     def hamilton_simple(
