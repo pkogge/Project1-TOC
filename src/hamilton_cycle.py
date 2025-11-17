@@ -100,7 +100,7 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
         for permutation in itertools.permutations(list(vertices)):
             if self.canWalk(list(permutation), edges):
                 finalpath = list(permutation)
-                print(f'hamiltonian: {permutation}')
+                print(f'hamiltonian path: {permutation}')
                 break
         
         # Find hamiltonian cycle

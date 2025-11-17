@@ -26,8 +26,10 @@ def main():
     elif selection["name"] == ProjectSelection.graph_coloring.name:
         solver = GraphColoring(INPUT_FILE)
     
+
     if solver:
         solver.run()
+        os.system(f'python "{os.path.join(os.path.dirname(__file__), "graph.py")}"')
 
 
     
