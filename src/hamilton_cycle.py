@@ -75,10 +75,6 @@ class HamiltonCycleColoring(HamiltonCycleAbstractClass):
     def _build_adjacency(
         self, vertices: Set[int], edges: List[Tuple[int, int]]
     ) -> Dict[int, Set[int]]:
-        """
-        Build an undirected adjacency list for the given vertices/edges.
-        Kept intentionally simple so it mirrors the examples from lecture.
-        """
         adjacency: Dict[int, Set[int]] = {vertex: set() for vertex in vertices}
         for u, v in edges:
             adjacency.setdefault(u, set()).add(v)
