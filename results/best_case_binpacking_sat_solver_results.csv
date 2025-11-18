@@ -1,0 +1,3 @@
+instance_id,bin_capacity,bins_array,method,time_taken
+0,10,"[5, 4, 1]",BestCase,7.944006938487291e-06
+1,10,"[5, 4, 1]",BestCase,3.7569989217445254e-06

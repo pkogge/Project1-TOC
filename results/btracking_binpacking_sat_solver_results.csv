@@ -1,0 +1,3 @@
+instance_id,bin_capacity,bins_array,method,time_taken
+0,10,"[2, 5, 3]",BackTracking,6.9029920268803835e-06
+1,10,"[2, 5, 3]",BackTracking,3.7370045902207494e-06

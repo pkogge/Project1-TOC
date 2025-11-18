@@ -1,0 +1,4 @@
+Instance_ID,Num_Vertices,Num_Edges,Hamiltonian_Path,Hamiltonian_Cycle,Largest_Cycle_Size,Algorithm,Time
+1,4,5,"[1, 2, 3, 4]","[1, 2, 3, 4, 1]",4,Backtracking,0.000009
+2,6,10,"[1, 5, 3, 2, 4, 6]","[1, 5, 3, 2, 4, 6, 1]",6,Backtracking,0.000007
+3,5,4,None,None,0,Backtracking,0.000010

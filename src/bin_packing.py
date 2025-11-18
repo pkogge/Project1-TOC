@@ -31,6 +31,7 @@ from typing import List
 
 from src.helpers.bin_packing_helper import BinPackingAbstractClass
 
+import copy
 
 class BinPacking(BinPackingAbstractClass):
     """
@@ -44,7 +45,27 @@ class BinPacking(BinPackingAbstractClass):
     def binpacking_backtracing(
         self, bin_capacity: int, clauses: List[int]
     ) -> List[List[int]]:
-        pass
+        
+        target = bin_capacity
+
+        def backtrack(idx: int, current_sum: int, current: List[int]):
+            if current_sum == target:
+                return current[:]
+            if current_sum > target or idx == len(clauses):
+                return None
+
+            # choose clauses[idx]
+            with_curr = backtrack(idx + 1, current_sum + clauses[idx], current + [clauses[idx]])
+            if with_curr is not None:
+                return with_curr
+
+            # skip clauses[idx]
+            return backtrack(idx + 1, current_sum, current)
+
+        sol = backtrack(0, 0, [])
+        if sol is not None:
+            return [sol]
+        return [[-9]]
 
     def binpacking_bruteforce(
         self, bin_capacity: int, clauses: List[int]
@@ -59,4 +80,26 @@ class BinPacking(BinPackingAbstractClass):
     def binpacking_bestcase(
         self, bin_capacity: int, clauses: List[int]
     ) -> List[List[int]]:
-        pass
+        target = bin_capacity
+
+        # dp[s] = list of clause *indices* that sum to s, or None if unreachable
+        dp: List[Optional[List[int]]] = [None] * (target + 1)
+        dp[0] = []
+
+        for idx, c in enumerate(clauses):
+            if c > target:
+                continue  # this item can't fit
+
+            # go backwards so we don't reuse the same item multiple times
+            for s in range(target, c - 1, -1):
+                if dp[s - c] is not None and dp[s] is None:
+                    dp[s] = dp[s - c] + [idx]
+
+            # hit the target
+            if dp[target] is not None:
+                solution = [clauses[i] for i in dp[target]]
+                return [solution]
+
+        # no exact packing found
+        return [[-9]]
+
