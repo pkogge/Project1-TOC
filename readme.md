@@ -1,3 +1,46 @@
+| # | Item                  | Details            |
+| - | --------------------- | ------------------ |
+| 1 | Team Name             | Problem Solverz    |
+| 2 | Team Members & NetIDs | AJ Jones, ajones42 |
+| # | Item                       | Details                                                         |
+| - | -------------------------- | --------------------------------------------------------------- |
+| 3 | Overall Project Attempted  | Backtracking SAT Solver – DPLL Implementation                   |
+| 4 | Overall Success            | Pretty successful; test files pass and works on larger datasets |
+| 5 | Approx. Total Time (hours) | 6–7                                                             |
+| 6 | GitHub Repository          | [Link](https://github.com/ajones2005/Project1-TOC.git)          |
+| File/Folder                           | Contents & Use                                                           |
+| ------------------------------------- | ------------------------------------------------------------------------ |
+| `sat_solver.py`                       | Main algorithm implementation, file input/output, unit propagation       |
+| `2SAT.cnf`, `cnffile.cnf`, `kSAT.cnf` | Test files in DIMACS CNF format; test solver on small and large datasets |
+| `resultsfile.csv`                     | Output file with instance ID, variables, clauses, and method used        |
+| # | Item                  | Details                    |
+| - | --------------------- | -------------------------- |
+| 8 | Languages & Libraries | Python, os, sys, csv, time |
+| # | Item            | Details                                                                                                                                                          |
+| - | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 9 | Data Structures | List of lists (CNF formula), dict (variable assignments), dict (polarity for pure literals), tuple (CNF representation), dict (solution output), list (CSV rows) |
+| #  | Item           | Details                                                                                                                                                                                                                                                                                                         |
+| -- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10 | Code Operation | The SAT solver solves boolean formulas in CNF using a backtracking DPLL algorithm. Input CSV files contain CNF formulas. The solver uses recursive backtracking enhanced by unit propagation and pure literal elimination. Early termination occurs when all clauses are satisfied or a contradiction is found. |
+| #  | Item       | Details                                                                                                                                                                                      |
+| -- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 11 | Test Cases | CNF formulas with various variables and clauses. Tautologies test simplification, repeated clauses test robustness, multiple instances per file test solver’s ability to separate instances. |
+| #  | Item                 | Details                                                                                                     |
+| -- | -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 12 | Development Approach | Conducted research on DPLL, watched tutorials, divided problem into sub-problems, and tested incrementally. |
+| #  | Item               | Details                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 13 | Results Discussion | Tested on three CNF instances with 4 variables and 10 clauses each. Problem 1 was unsatisfiable; Problems 2 and 3 were satisfiable with assignments `{1: True, 2: True, 3: True, 4: False}` and `{1: False, 2: False, 3: True, 4: True}`. Low computation times indicate efficiency with unit propagation, pure literal elimination, and backtracking. The solver reliably identifies satisfiable and unsatisfiable formulas. |
+| #  | Item              | Details               |
+| -- | ----------------- | --------------------- |
+| 14 | Team Organization | Single member project |
+| #  | Item                           | Details                                                                                                                                                                   |
+| -- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 15 | What Would Be Done Differently | Incorporate more automated testing, including edge cases with large formulas, redundant clauses, and known UNSAT instances to verify correctness and measure performance. |
+| #  | Item      | Details                                                                                                                              |
+| -- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 16 | Resources | [YouTube Video](https://www.youtube.com/watch?v=opppqIdiX-A&t=5294s), [DPLL Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm) |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Overview: These instructions provide you with a skeleton python definition for each problem type. After cloning this repo, you will modify only those functions that you have signed up for (at most 3 for a three person group)
 * You will clone a repo that has skeleton code for each possible program.
 * You will modify the body of your selected code for your implementation. Do not change the arguments.
