@@ -48,6 +48,7 @@ class NTM_Tracer(TuringMachineSimulator):
         depth = 0
         accepted = False
 
+        # parent dictionary
         parents = { tuple(initial_config) : None}
 
         while depth < max_depth and not accepted:
