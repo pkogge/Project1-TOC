@@ -14,7 +14,8 @@ class NTM_Tracer(TuringMachineSimulator):
 
         # Initial Configuration: ["", start_state, input_string]
         # Note: Represent configuration as triples (left, state, right) [cite: 156]
-        initial_config = ["", self.start_state, input_string]
+        parent_index = None
+        initial_config = ["", self.start_state, input_string, parent_index]
 
         # The tree is a list of lists of configurations
         tree = [[initial_config]]
@@ -30,17 +31,20 @@ class NTM_Tracer(TuringMachineSimulator):
             # TODO: STUDENT IMPLEMENTATION NEEDED
             # 1. Iterate through every config in current_level.
             for config in current_level:
-                left, state, right = config
+                left, state, right, parent_index = config
             # 2. Check if config is Accept (Stop and print success) [cite: 179]
                 if state == self.accept_state:
                     print(f"String accepted in {depth} steps")
                     accepted = True
+                    print(f"Machine: {self.machine_name}")
+                    print(f"Input String: {input_string}")
+                    self.print_trace_path(config, tree, depth)
                     break
             # 3. Check if config is Reject (Stop this branch only) [cite: 181]
                 elif state == self.reject_state:
                     continue
             # 4. If not Accept/Reject, find valid transitions in self.transitions.
-                current_symbol = right if right[0] else "_"
+                current_symbol = right[0] if right else "_"
                 valid_trans = self.get_transitions(state, (current_symbol,))
             # 5. If no explicit transition exists, treat as implicit Reject.
                 if not valid_trans:
@@ -83,7 +87,8 @@ class NTM_Tracer(TuringMachineSimulator):
                         else:
                             r = writeSymbol
                     
-                    next_level.append([l, nextState, r])
+                    parent_idx = current_level.index(config)
+                    next_level.append([l, nextState, r, parent_idx])
                         
 
             # Placeholder for logic:
@@ -98,9 +103,34 @@ class NTM_Tracer(TuringMachineSimulator):
         if depth >= max_depth:
             print(f"Execution stopped after {max_depth} steps.")  # [cite: 259]
 
-    def print_trace_path(self, final_node):
+
+
+    def print_trace_path(self, final_node, tree, level):
         """
         Backtrack and print the path from root to the accepting node.
         Ref: Section 4.2 [cite: 165]
         """
-        pass
+        path = []
+        current = final_node
+
+        while current is not None:
+
+            path.append((level, [current[:-1]]))
+
+            parent_idx = current[-1]
+            if parent_idx is None:
+                break
+            level -= 1
+            current = tree[level][parent_idx]
+        
+        path.reverse()
+
+        for level, pathNode in path:
+            print(f"Level: {level}")
+            for node in tree[level]:
+                print(node)
+
+
+
+
+
