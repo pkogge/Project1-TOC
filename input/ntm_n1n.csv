@@ -1,4 +1,4 @@
-ZeroNOneN
+ZeroNOneN – Updated to Full TM Specification (Added states q5, q6, qaccept; added '$'; expanded transitions)
 q0,q1,q2,q3,q4,q5,q6,qreject,qaccept
 0,1
 0,1,X,$,_

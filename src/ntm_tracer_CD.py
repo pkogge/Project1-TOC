@@ -16,7 +16,7 @@ class NTM_Tracer(TuringMachineSimulator):
         # Initial Configuration: ["", start_state, input_string]
         # Note: Represent configuration as triples (left, state, right) [cite: 156]
         # CD NOTED - (adapted: node format used here is [left, state, right, parent_idx] with parent last)
-        # initial config: head starts over the leading '$'
+        # initial config: head starts over the leading '$' - THIS IS A CRUCIAL ASSUMPTION
         initial_config = ["", self.start_state, "$" + input_string + blank, None]
         
         # The tree is a list of lists of configurations

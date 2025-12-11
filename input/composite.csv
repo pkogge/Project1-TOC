@@ -1,5 +1,5 @@
-composite_number tester
-q1,q2,q3,q4,q5s,q5x,q6,q7,qaccept,qreject
+composite number tester - added q0 and assumed start with $
+q0,q1,q2,q3,q4,q5s,q5x,q6,q7,qaccept,qreject
 1
 1,y,$,_
 q0
