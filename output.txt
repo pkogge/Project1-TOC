@@ -1,0 +1,68 @@
+Tracing NTM: ZeroNOneN on input '0011'
+Accepted - 0011 - 30 depth, 30 transitions
+
+_
+Level: 0
+ q0 $0011_
+Level: 1
+$ q1 0011_
+Level: 2
+$0 q1 011_
+Level: 3
+$00 q1 11_
+Level: 4
+$001 q2 1_
+Level: 5
+$0011 q2 _
+Level: 6
+$001 q3 1_
+Level: 7
+$00 q3 11_
+Level: 8
+$0 q3 011_
+Level: 9
+$ q3 0011_
+Level: 10
+ q3 $0011_
+Level: 11
+$ q4 0011_
+Level: 12
+$X q5 011_
+Level: 13
+$X0 q5 11_
+Level: 14
+$X q6 0X1_
+Level: 15
+$ q6 X0X1_
+Level: 16
+ q6 $X0X1_
+Level: 17
+$ q4 X0X1_
+Level: 18
+$X q4 0X1_
+Level: 19
+$XX q5 X1_
+Level: 20
+$XXX q5 1_
+Level: 21
+$XX q6 XX_
+Level: 22
+$X q6 XXX_
+Level: 23
+$ q6 XXXX_
+Level: 24
+ q6 $XXXX_
+Level: 25
+$ q4 XXXX_
+Level: 26
+$X q4 XXX_
+Level: 27
+$XX q4 XX_
+Level: 28
+$XXX q4 X_
+Level: 29
+$XXXX q4 _
+Level: 30
+$XXX qa X_
+--
+
