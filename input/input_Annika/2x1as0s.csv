@@ -1,0 +1,27 @@
+Twice as Many 0s as 1s
+q0,q1,q2,q3,q4,q5,qaccept,qreject
+0,1,$
+$,0,1,x,_
+q0
+qaccept
+qreject
+q0,$,q1,$,R
+q1,x,q1,x,R
+q1,_,qaccept,_,R
+q1,0,q1,0,R
+q1,1,q2,x,L
+q2,0,q2,0,L
+q2,x,q2,x,L
+q2,1,q3,1,L
+q2,$,q3,$,R
+q3,_,qreject,_,R
+q3,1,q3,1,R
+q3,x,q3,x,R
+q3,0,q4,x,R
+q4,1,q4,1,R
+q4,x,q4,x,R
+q4,_,qreject,_,R
+q4,0,q5,x,L
+q5,x,q5,x,L
+q5,1,q5,1,L
+q5,$,q1,$,R

@@ -1,7 +1,7 @@
 from src.helpers.argument_input import parse_inputs
 from src.helpers.turing_machine import TuringMachineSimulator
 from src.ktape_dtm import KTape_DTM
-from src.ntm_tracer import NTM_Tracer
+from src.traceTM_Annika import NTM_Tracer
 
 
 def main():
