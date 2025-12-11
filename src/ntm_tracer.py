@@ -31,47 +31,45 @@ class NTM_Tracer(TuringMachineSimulator):
             # 1. Iterate through every config in current_level.
             for config in current_level:
                 left, state, right = config
+                curr = right[0] if right else self.blank_symbol
             # 2. Check if config is Accept (Stop and print success) [cite: 179]
                 if state == self.accept_state:
                     print(f'string accepted: depth = {depth}. path to acceptance: {config}')
                     accepted = True
-                    all_rejected = False
                     break
             # 3. Check if config is Reject (Stop this branch only) [cite: 181]
                 if state == self.reject_state:
                     continue
             # 4. If not Accept/Reject, find valid transitions in self.transitions.
                 valid = False
-                for (src, read_ch), transitions in self.transitions.items():
-                    curr = right[0] if right else self.blank_symbol
-                    if src == state and read_ch == curr:
-                        for (write_ch, dir, dst) in transitions:
-                            valid = True
-                            all_rejected = False
 
-                            new_left = list(left)
-                            new_right = list(right)
+                if right:
+                    curr = right[0]
+                else:
+                    curr = self.blank_symbol
+
+                for (src, read_ch), transitions in self.transitions.items():
+                    if src == state and read_ch == curr:
+                        for (dst, write_ch, dir) in transitions:
+                            new_left = left.copy()
+                            new_right = right.copy()
 
                             if new_right:
                                 new_right[0] = write_ch
                             else:
-                                if write_ch != self.blank_symbol:
-                                    new_right.append(write_ch)
+                                new_right = [write_ch]
             # 5. If no explicit transition exists, treat as implicit Reject.
             # 6. Generate children configurations and append to next_level[cite: 148].
 
                             if dir == 'R':
-                                if new_right:
-                                    new_left.append(new_right.pop(0))
-                                else:
-                                    new_left.append(self.blank_symbol)
-                            elif dir == 'L':
-                                if new_left:
-                                    new_right.insert(0, new_left.pop())
-                                else:
-                                    new_right.insert(0, self.blank_symbol)
+                                new_left.append(new_right.pop(0))
+                                if not new_right:
+                                    new_right.append(self.blank_symbol)
 
-                            next_config = ["".join(new_left), dst, "".join(new_right)]
+                            elif dir == 'L':
+                                new_right.insert(0, new_left.pop() if new_left else self.blank_symbol)
+
+                            next_config = (new_left, dst, new_right)
                             next_level.append(next_config)
 
                 if not valid and state not in [self.accept_state, self.reject_state]:
