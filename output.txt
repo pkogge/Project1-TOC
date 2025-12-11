@@ -1,0 +1,194 @@
+Tracing NTM: a_plus tester with q0 and assumed $ start on input 'aaa'
+Accepted - aaa - 5 depth, 8 transitions
+
+_
+Level: 0
+ q0 $aaa_
+Level: 1
+$ q1 aaa_
+Level: 2
+$a q1 aa_
+Level: 3
+$aa q1 a_
+Level: 4
+$aaa q2 _
+Level: 5
+$aa q3 a_
+--
+
+Tracing NTM: composite number tester - added q0 and assumed start with $ on input '111111'
+Accepted - 111111 - 28 depth, 103 transitions
+
+_
+Level: 0
+ q0 $111111_
+Level: 1
+$ q1 111111_
+Level: 2
+$y q2 11111_
+Level: 3
+$yx q3 1111_
+Level: 4
+$y q4 x1111_
+Level: 5
+$ q4 yx1111_
+Level: 6
+$_ q5s x1111_
+Level: 7
+$_x q5s 1111_
+Level: 8
+$_ q6 xy111_
+Level: 9
+$ q6 _xy111_
+Level: 10
+$_ q7 xy111_
+Level: 11
+$__ q5x y111_
+Level: 12
+$__y q5x 111_
+Level: 13
+$__ q6 yx11_
+Level: 14
+$_ q6 _yx11_
+Level: 15
+$__ q7 yx11_
+Level: 16
+$___ q5s x11_
+Level: 17
+$___x q5s 11_
+Level: 18
+$___ q6 xy1_
+Level: 19
+$__ q6 _xy1_
+Level: 20
+$___ q7 xy1_
+Level: 21
+$____ q5x y1_
+Level: 22
+$____y q5x 1_
+Level: 23
+$____ q6 yx_
+Level: 24
+$___ q6 _yx_
+Level: 25
+$____ q7 yx_
+Level: 26
+$_____ q5s x_
+Level: 27
+$_____x q5s _
+Level: 28
+$_____ qaccept x_
+--
+
+Tracing NTM: ZeroNOneN – made sure it was 0n1n instead of amt of 0s = amt of 1s - Updated to Full TM Specification (Added states q5 q6 qaccept; added '$'; expanded transitions) on input '000111'
+Accepted - 000111 - 52 depth, 52 transitions
+
+_
+Level: 0
+ q0 $000111_
+Level: 1
+$ q1 000111_
+Level: 2
+$0 q1 00111_
+Level: 3
+$00 q1 0111_
+Level: 4
+$000 q1 111_
+Level: 5
+$0001 q2 11_
+Level: 6
+$00011 q2 1_
+Level: 7
+$000111 q2 _
+Level: 8
+$00011 q3 1_
+Level: 9
+$0001 q3 11_
+Level: 10
+$000 q3 111_
+Level: 11
+$00 q3 0111_
+Level: 12
+$0 q3 00111_
+Level: 13
+$ q3 000111_
+Level: 14
+ q3 $000111_
+Level: 15
+$ q4 000111_
+Level: 16
+$X q5 00111_
+Level: 17
+$X0 q5 0111_
+Level: 18
+$X00 q5 111_
+Level: 19
+$X0 q6 0X11_
+Level: 20
+$X q6 00X11_
+Level: 21
+$ q6 X00X11_
+Level: 22
+ q6 $X00X11_
+Level: 23
+$ q4 X00X11_
+Level: 24
+$X q4 00X11_
+Level: 25
+$XX q5 0X11_
+Level: 26
+$XX0 q5 X11_
+Level: 27
+$XX0X q5 11_
+Level: 28
+$XX0 q6 XX1_
+Level: 29
+$XX q6 0XX1_
+Level: 30
+$X q6 X0XX1_
+Level: 31
+$ q6 XX0XX1_
+Level: 32
+ q6 $XX0XX1_
+Level: 33
+$ q4 XX0XX1_
+Level: 34
+$X q4 X0XX1_
+Level: 35
+$XX q4 0XX1_
+Level: 36
+$XXX q5 XX1_
+Level: 37
+$XXXX q5 X1_
+Level: 38
+$XXXXX q5 1_
+Level: 39
+$XXXX q6 XX_
+Level: 40
+$XXX q6 XXX_
+Level: 41
+$XX q6 XXXX_
+Level: 42
+$X q6 XXXXX_
+Level: 43
+$ q6 XXXXXX_
+Level: 44
+ q6 $XXXXXX_
+Level: 45
+$ q4 XXXXXX_
+Level: 46
+$X q4 XXXXX_
+Level: 47
+$XX q4 XXXX_
+Level: 48
+$XXX q4 XXX_
+Level: 49
+$XXXX q4 XX_
+Level: 50
+$XXXXX q4 X_
+Level: 51
+$XXXXXX q4 _
+Level: 52
+$XXXXX qaccept X_
+--
+
