@@ -1,10 +1,11 @@
-a plus
-q1,q2,q3
+a plus test (TEST 1) This assumes that the program starts with $.
+s0,s1,s2,s3
 a
 a,_
-q1
-q3
-qreject
-q1,a,q1,a,R
-q1,a,q2,a,R
-q2,_,q3,_,L
+s0
+s3
+sR
+s0,$,s1,$,R
+s1,a,s1,a,R
+s1,a,s2,a,R
+s2,_,s3,_,L

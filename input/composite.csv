@@ -1,0 +1,27 @@
+Composite Number Tester (TEST 2) This assumes that the program starts with $.
+s0,s1,s2,s3,s4,s5s,s5x,s6,s7,sA,sR
+1
+1,y,$,_,x
+s0
+sA
+sR
+s0,$,s1,$,R
+s1,1,s2,y,R
+s2,1,s3,x,R
+s3,1,s3,x,R
+s3,1,s4,1,L
+s4,x,s4,x,L
+s4,y,s5s,_,R
+s5s,y,s5s,y,R
+s5s,x,s5s,x,R
+s5s,_,sA,_,L
+s5s,1,s6,y,L
+s5x,x,s5x,x,R
+s5x,y,s5x,y,R
+s5x,1,s6,x,L
+s5x,_,sR,_,L
+s6,y,s6,y,L
+s6,x,s6,x,L
+s6,_,s7,_,R
+s7,x,s5x,_,R
+s7,y,s5s,_,R
