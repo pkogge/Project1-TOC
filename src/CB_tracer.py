@@ -82,6 +82,19 @@ def ntm_tracer(machine, input_string, max_depth=None): #follows same logic as nt
                 branch_points += 1
             #generate nxt configuraions for THIS config
             #TBD
+            for next_state, write_char, move_direction in possible:
+                #initilaize modifiable tape list
+                tape_list = list(tape)
+
+                #write symbol
+
+                #move head L or R
+
+                #convert tape back to strign
+
+                #save new config
+                #log the transiton
+                
 
             
 
