@@ -21,11 +21,19 @@ class NTM_Tracer(TuringMachineSimulator):
 
         depth = 0
         accepted = False
+        total_transitions = 0
 
         while depth < max_depth and not accepted:
             current_level = tree[-1]
             next_level = []
             all_rejected = True
+            
+            print(f"level {depth}") #print the current levl
+            for config in current_level: #format the ledt,state,head_char, rest_of_right
+                left, state, right = config
+                head_char = right[0] if right else "_"
+                rest_right = right[1:] if right else ""
+                print(f"{left} {state} {head_char}{rest_right}")
 
             # TODO: STUDENT IMPLEMENTATION NEEDED
             # 1. Iterate through every config in current_level.
@@ -34,6 +42,8 @@ class NTM_Tracer(TuringMachineSimulator):
             # 4. If not Accept/Reject, find valid transitions in self.transitions.
             # 5. If no explicit transition exists, treat as implicit Reject.
             # 6. Generate children configurations and append to next_level[cite: 148].
+
+
 
             # Placeholder for logic:
             if not next_level and all_rejected:
