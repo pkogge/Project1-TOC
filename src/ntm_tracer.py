@@ -1,10 +1,13 @@
-from src.helpers.turing_machine import TuringMachineSimulator
-
+from src.helpers.turing_machine import TuringMachineSimulator, BLANK, WILDCARD
 
 # ==========================================
 # PROGRAM 1: Nondeterministic TM [cite: 137]
 # ==========================================
 class NTM_Tracer(TuringMachineSimulator):
+    def __init__(self, filename):
+        # Load the machine using the helper class logic
+        super().__init__(filename)
+
     def run(self, input_string, max_depth):
         """
         Performs a Breadth-First Search (BFS) trace of the NTM.
@@ -13,109 +16,94 @@ class NTM_Tracer(TuringMachineSimulator):
         print(f"Tracing NTM: {self.machine_name} on input '{input_string}'")
 
         # Initial Configuration: ["", start_state, input_string]
-        # Note: Represent configuration as triples (left, state, right) [cite: 156]
+        # Note: input_string should treat empty as BLANK if needed, but usually starts as is.
         initial_config = ["", self.start_state, input_string]
 
         # The tree is a list of lists of configurations
         tree = [[initial_config]]
 
         depth = 0
-        accepted = False
         total_transitions = 0
 
-        while depth < max_depth and not accepted:
+        while depth < max_depth:
             current_level = tree[-1]
             next_level = []
-            all_rejected = True
             
-            print(f"level {depth}") #print the current levl
-            for config in current_level: #format the ledt,state,head_char, rest_of_right
+            # Print Level Info
+            print(f"Level {depth}")
+            for config in current_level:
                 left, state, right = config
-                head_char = right[0] if right else "_"
-                rest_right = right[1:] if right else ""
-                print(f"{left} {state} {head_char}{rest_right}")
-                
-                
-            for config in current_level: #Iterate through every config in current_level.
-                left, state, right = config
-                
-                
-                if state == self.accept_state: #Check if config is Accept
-                    print(f"String accepted in {depth}")
-                    accepted = True
+                # Visual format: Left State Right (use underscore for empty tape representation if needed)
+                display_right = right if right else BLANK
+                print(f"{left} {state} {display_right}")
+
+            # Check for Acceptance in current level first
+            for config in current_level:
+                if config[1] == self.accept_state:
+                    print(f"String accepted in {depth}") 
+                    print(f"Total transitions simulated: {total_transitions}")
                     return
 
-                 
-                if state == self.reject_state: #Check if config is Reject
-                    continue 
+            # Process Transitions to generate next_level
+            for config in current_level:
+                left, state, right = config
 
-                all_rejected = False # Found at least one non-reject state to process
-                
-                # Determine character under head (treat empty right as blank '_')
-                head_char = right[0] if len(right) > 0 else "_"
-                
-                # If not Accept/Reject, find valid transitions in self.transitions.
-                # Key is (current_state, read_char). handle wildcard if necessary, but we want standard lookup first.
-                transitions = self.transitions.get((state, head_char), [])
-                
-                
-                for trans in transitions: #If no explicit transition exists, treat as implicit Reject.
-                    next_state = trans['next_state']
-                    write_char = trans['write_char']
-                    direction = trans['direction']
-                    
-                    #Generate children and append to next_level
+                # Stop this branch if rejected
+                if state == self.reject_state:
+                    continue
+
+                # Identify character under head
+                head_char = right[0] if len(right) > 0 else BLANK
+
+                # Use helper to find valid transitions (returns list of dicts)
+                # Helper expects tuple for k-tape compatibility
+                valid_moves = self.get_transitions(state, (head_char,))
+
+                for move in valid_moves:
+                    # Parse transition details from helper dict
+                    # NTM is 1-tape, so we access index 0 of the tuples
+                    next_state = move['next']
+                    write_char = move['write'][0]
+                    direction = move['move'][0]
+
+                    # Handle Wildcard Write: '*' means do not change the character 
+                    if write_char == WILDCARD:
+                        write_char = head_char
+
+                    # Construct new configuration
                     new_left = left
                     new_right = right
-                    
-                    # Construct tape after writing
-                    # Current head position is replaced by write_char
-                    # Tape logic: left + write_char + (right[1:] or "")
-                    
+
                     if direction == 'R':
                         new_left = left + write_char
                         new_right = right[1:] if len(right) > 1 else ""
-                        # If we moved right into "void", it becomes empty string.
-                    
                     elif direction == 'L':
                         if len(left) > 0:
-                            # Move char from end of left to front of right
                             char_from_left = left[-1]
                             new_left = left[:-1]
                             new_right = char_from_left + write_char + (right[1:] if len(right) > 1 else "")
                         else:
-                            # test caaese: moving left at start of tape. 
-                            # Usually stays or crashes. assuming standard stay-at-edge or blank tape left behavior.
-                            # For simplicity/safety with standard strings:
-                            new_right = "_" + write_char + (right[1:] if len(right) > 1 else "")
-                                                        
-                    # Add to next level
+                            # Moving left at start of tape holds position (standard behavior)
+                            # or inserts blank depending on specific convention. 
+                            # Assuming "Stay" behavior at left edge or blank insertion:
+                            new_right = BLANK + write_char + (right[1:] if len(right) > 1 else "")
+                            new_left = ""
+                    elif direction == 'S': # Stay Option
+                        new_right = write_char + (right[1:] if len(right) > 1 else "")
+
+                    # Append new configuration
                     next_level.append([new_left, next_state, new_right])
                     total_transitions += 1
-                    
-            # TODO: STUDENT IMPLEMENTATION NEEDED
-            # 1. Iterate through every config in current_level.
-            # 2. Check if config is Accept (Stop and print success) [cite: 179]
-            # 3. Check if config is Reject (Stop this branch only) [cite: 181]
-            # 4. If not Accept/Reject, find valid transitions in self.transitions.
-            # 5. If no explicit transition exists, treat as implicit Reject.
-            # 6. Generate children configurations and append to next_level[cite: 148].
 
-
-            # Placeholder for logic:
-            if not next_level and all_rejected:
-                # TODO: Handle "String rejected" output [cite: 258]
-                break
+            # If no configurations exist in next level, all branches died -> Reject
+            if not next_level:
+                print(f"String rejected in {depth}") 
+                return
 
             tree.append(next_level)
             depth += 1
 
-        if depth >= max_depth:
-            print(f"Execution stopped after {max_depth} steps.")  # [cite: 259]
+        print(f"Execution stopped after {max_depth} steps.") 
 
     def print_trace_path(self, final_node):
-        """
-        Backtrack and print the path from root to the accepting node.
-        Ref: Section 4.2 [cite: 165]
-        """
         pass
