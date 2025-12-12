@@ -1,0 +1,11 @@
+even a count
+q0,q1,qacc,qreject
+a
+a,_
+q0
+qacc
+qreject
+q0,a,q1,a,R
+q1,a,q0,a,R
+q0,_,qacc,_,L
+q1,_,qreject,_,L
