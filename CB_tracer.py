@@ -6,7 +6,6 @@ def parse_csv(file_path):
     with open(file_path, 'r') as file:
         csv_reader = csv.reader(file) #read data
         name = next(csv_reader)[0] 
-        string_read = next(csv_reader)[0] 
         states = next(csv_reader)[0].split(',') 
         alphabet = next(csv_reader)[0].split(',') #sigma
         tape_symbols = next(csv_reader)[0].split(',') 
@@ -21,7 +20,6 @@ def parse_csv(file_path):
             curr_state,char, next_state, write_char, move_dir= row
             transitions.setdefault((curr_state, char),[]).append((next_state, write_char, move_dir))
     return { 'name': name,
-        'string_read': string_read,
         'states':states,
         'alphabet': alphabet,
         'tape_symbols':tape_symbols,
@@ -40,8 +38,10 @@ def ntm_tracer(machine, input_string, max_depth=None): #follows same logic as nt
     transitions = machine ['transitions']
 
     #Vars that will change after going through tree
-    total_configs, total_transitions = 0
-    accept_configs, reject_configs =0
+    total_configs =0
+    total_transitions = 0
+    accept_configs =0 
+    reject_configs =0
     curr_depth =0
     transition_log = []
     branch_points =0 #keep track of how many states had more than 1 possible transition (Nondeterminisitc bracnhign points/level of nondeterminism)
@@ -81,7 +81,7 @@ def ntm_tracer(machine, input_string, max_depth=None): #follows same logic as nt
             if len(possible) >1:
                 branch_points += 1
             #generate nxt configuraions for THIS config
-            #TBD
+            
             for next_state, write_char, move_direction in possible:
                 #initilaize modifiable tape list
                 tape_list = list(tape)
@@ -107,8 +107,30 @@ def ntm_tracer(machine, input_string, max_depth=None): #follows same logic as nt
 
             total_transitions +=len(possible)
 
-    #TBD test code/program
-    machine_input = input('Select file to run\n') #user types
-    m = f'input/{machine_input}'
-    max_depth = 10
-    machine = parse_csv(machine_input)
+        #if no more configs, then we cant reach any accept stae
+        if not next_level:
+            print("\nString is rejected.")
+            print(f"Stopped at depth: {curr_depth}") #no more configs
+            print(f"Total configurations: {total_configs}")
+            print(f"Accepted: {accept_configs}")
+            print(f"Rejected: {reject_configs}")
+            print("\nTransition Log:")
+            for t in transition_log:
+                print(" ", t)
+            return None
+
+        # add  next level to BFS tree
+        tree.append(next_level)
+        curr_depth += 1
+
+#TBD test code/program
+machine_input = input('Select file to run\n').strip() #user types
+machine_input = f"input/{machine_input}" #search wuthin the input folder
+max_depth = 15 #termination limit
+machine = parse_csv(machine_input)
+#ask user for the input string instead of reading it from the CSV
+string = input("Enter the input string to run on this machine:\n").strip()
+
+print(f"Running Simulation for: {string}")
+result = ntm_tracer(machine, string, max_depth)
+print(f"Solution Depth for '{string}': {result}")
