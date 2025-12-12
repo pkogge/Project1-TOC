@@ -1,0 +1,43 @@
+Tracing NTM: find_101 on input '11001011'
+
+Accepted. String was accepted at a depth of 5 with configuration: ['11001', 'q_acc', '011'] by simulating 35 transitions.
+
+Degree of Nondeterminism: 1.5909090909090908
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q0, Right Stack: 11001011
+Depth 1:
+Left Stack: 1, Current State: q0, Right Stack: 1001011
+Left Stack: 1, Current State: q1, Right Stack: 1001011
+Depth 2:
+Left Stack: 11, Current State: q0, Right Stack: 001011
+Left Stack: 11, Current State: q1, Right Stack: 001011
+Left Stack: 11, Current State: q1, Right Stack: 001011
+Depth 3:
+Left Stack: 110, Current State: q0, Right Stack: 01011
+Left Stack: 110, Current State: q1, Right Stack: 01011
+Left Stack: 110, Current State: q2, Right Stack: 01011
+Left Stack: 110, Current State: q1, Right Stack: 01011
+Left Stack: 110, Current State: q2, Right Stack: 01011
+Depth 4:
+Left Stack: 1100, Current State: q0, Right Stack: 1011
+Left Stack: 1100, Current State: q1, Right Stack: 1011
+Left Stack: 1100, Current State: q2, Right Stack: 1011
+Left Stack: 1100, Current State: q2, Right Stack: 1011
+Left Stack: 1100, Current State: q1, Right Stack: 1011
+Left Stack: 1100, Current State: q2, Right Stack: 1011
+Left Stack: 1100, Current State: q2, Right Stack: 1011
+Depth 5:
+Left Stack: 11001, Current State: q0, Right Stack: 011
+Left Stack: 11001, Current State: q1, Right Stack: 011
+Left Stack: 11001, Current State: q1, Right Stack: 011
+Left Stack: 11001, Current State: q2, Right Stack: 011
+Left Stack: 11001, Current State: q_acc, Right Stack: 011
+Left Stack: 11001, Current State: q2, Right Stack: 011
+Left Stack: 11001, Current State: q_acc, Right Stack: 011
+Left Stack: 11001, Current State: q1, Right Stack: 011
+Left Stack: 11001, Current State: q2, Right Stack: 011
+Left Stack: 11001, Current State: q_acc, Right Stack: 011
+Left Stack: 11001, Current State: q2, Right Stack: 011
+Left Stack: 11001, Current State: q_acc, Right Stack: 011
