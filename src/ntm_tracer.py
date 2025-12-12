@@ -59,6 +59,40 @@ class NTM_Tracer(TuringMachineSimulator):
                 transitions = self.transitions.get((state, head_char), [])
                 
                 
+                for trans in transitions: #If no explicit transition exists, treat as implicit Reject.
+                    next_state = trans['next_state']
+                    write_char = trans['write_char']
+                    direction = trans['direction']
+                    
+                    #Generate children and append to next_level
+                    new_left = left
+                    new_right = right
+                    
+                    # Construct tape after writing
+                    # Current head position is replaced by write_char
+                    # Tape logic: left + write_char + (right[1:] or "")
+                    
+                    if direction == 'R':
+                        new_left = left + write_char
+                        new_right = right[1:] if len(right) > 1 else ""
+                        # If we moved right into "void", it becomes empty string.
+                    
+                    elif direction == 'L':
+                        if len(left) > 0:
+                            # Move char from end of left to front of right
+                            char_from_left = left[-1]
+                            new_left = left[:-1]
+                            new_right = char_from_left + write_char + (right[1:] if len(right) > 1 else "")
+                        else:
+                            # test caaese: moving left at start of tape. 
+                            # Usually stays or crashes. assuming standard stay-at-edge or blank tape left behavior.
+                            # For simplicity/safety with standard strings:
+                            new_right = "_" + write_char + (right[1:] if len(right) > 1 else "")
+                                                        
+                    # Add to next level
+                    next_level.append([new_left, next_state, new_right])
+                    total_transitions += 1
+                    
             # TODO: STUDENT IMPLEMENTATION NEEDED
             # 1. Iterate through every config in current_level.
             # 2. Check if config is Accept (Stop and print success) [cite: 179]
@@ -66,7 +100,6 @@ class NTM_Tracer(TuringMachineSimulator):
             # 4. If not Accept/Reject, find valid transitions in self.transitions.
             # 5. If no explicit transition exists, treat as implicit Reject.
             # 6. Generate children configurations and append to next_level[cite: 148].
-
 
 
             # Placeholder for logic:
