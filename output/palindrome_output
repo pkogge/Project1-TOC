@@ -1,0 +1,16 @@
+Tracing NTM: palindrome on input 'aaaabbbaaaa'
+
+Accepted. String was accepted at a depth of 2 with configuration: ['_', 'q_acc', 'Xaaabbbaaaa'] by simulating 8 transitions.
+
+Degree of Nondeterminism: 1.6
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q0, Right Stack: aaaabbbaaaa
+Depth 1:
+Left Stack: a, Current State: q0, Right Stack: aaabbbaaaa
+Left Stack: , Current State: q_check_left, Right Stack: _Xaaabbbaaaa
+Depth 2:
+Left Stack: aa, Current State: q0, Right Stack: aabbbaaaa
+Left Stack: , Current State: q_check_left, Right Stack: aXaabbbaaaa
+Left Stack: _, Current State: q_acc, Right Stack: Xaaabbbaaaa

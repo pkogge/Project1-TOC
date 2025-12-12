@@ -1,0 +1,49 @@
+Tracing NTM: a plus on input 'aaaaaa'
+
+Accepted. String was accepted at a depth of 7 with configuration: ['aaaaa', 'q3', 'a_'] by simulating 13 transitions.
+
+Degree of Nondeterminism: 1.8571428571428572
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q1, Right Stack: aaaaaa
+Depth 1:
+Left Stack: a, Current State: q1, Right Stack: aaaaa
+Left Stack: a, Current State: q2, Right Stack: aaaaa
+Depth 2:
+Left Stack: aa, Current State: q1, Right Stack: aaaa
+Left Stack: aa, Current State: q2, Right Stack: aaaa
+Depth 3:
+Left Stack: aaa, Current State: q1, Right Stack: aaa
+Left Stack: aaa, Current State: q2, Right Stack: aaa
+Depth 4:
+Left Stack: aaaa, Current State: q1, Right Stack: aa
+Left Stack: aaaa, Current State: q2, Right Stack: aa
+Depth 5:
+Left Stack: aaaaa, Current State: q1, Right Stack: a
+Left Stack: aaaaa, Current State: q2, Right Stack: a
+Depth 6:
+Left Stack: aaaaaa, Current State: q1, Right Stack: 
+Left Stack: aaaaaa, Current State: q2, Right Stack: 
+Depth 7:
+Left Stack: aaaaa, Current State: q3, Right Stack: a_
+Tracing NTM: a plus on input 'aaa'
+
+Accepted. String was accepted at a depth of 4 with configuration: ['aa', 'q3', 'a_'] by simulating 7 transitions.
+
+Degree of Nondeterminism: 1.75
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q1, Right Stack: aaa
+Depth 1:
+Left Stack: a, Current State: q1, Right Stack: aa
+Left Stack: a, Current State: q2, Right Stack: aa
+Depth 2:
+Left Stack: aa, Current State: q1, Right Stack: a
+Left Stack: aa, Current State: q2, Right Stack: a
+Depth 3:
+Left Stack: aaa, Current State: q1, Right Stack: 
+Left Stack: aaa, Current State: q2, Right Stack: 
+Depth 4:
+Left Stack: aa, Current State: q3, Right Stack: a_

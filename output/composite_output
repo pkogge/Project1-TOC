@@ -1,0 +1,229 @@
+Tracing NTM: check_composite on input '11111'
+
+Accepted. String was accepted at a depth of 22 with configuration: ['____', 'qaccept', 'x_'] by simulating 62 transitions.
+
+Degree of Nondeterminism: 1.0508474576271187
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q1, Right Stack: 11111
+Depth 1:
+Left Stack: $, Current State: q2, Right Stack: 1111
+Depth 2:
+Left Stack: $x, Current State: q3, Right Stack: 111
+Depth 3:
+Left Stack: $xx, Current State: q3, Right Stack: 11
+Left Stack: $, Current State: q4, Right Stack: x111
+Depth 4:
+Left Stack: $xxx, Current State: q3, Right Stack: 1
+Left Stack: $x, Current State: q4, Right Stack: x11
+Left Stack: , Current State: q4, Right Stack: $x111
+Depth 5:
+Left Stack: $xxxx, Current State: q3, Right Stack: 
+Left Stack: $xx, Current State: q4, Right Stack: x1
+Left Stack: $, Current State: q4, Right Stack: xx11
+Left Stack: _, Current State: q5s, Right Stack: x111
+Depth 6:
+Left Stack: $x, Current State: q4, Right Stack: xx1
+Left Stack: , Current State: q4, Right Stack: $xx11
+Left Stack: _x, Current State: q5s, Right Stack: 111
+Depth 7:
+Left Stack: $, Current State: q4, Right Stack: xxx1
+Left Stack: _, Current State: q5s, Right Stack: xx11
+Left Stack: _, Current State: q6, Right Stack: x$11
+Depth 8:
+Left Stack: , Current State: q4, Right Stack: $xxx1
+Left Stack: _x, Current State: q5s, Right Stack: x11
+Left Stack: , Current State: q6, Right Stack: _x$11
+Depth 9:
+Left Stack: _, Current State: q5s, Right Stack: xxx1
+Left Stack: _xx, Current State: q5s, Right Stack: 11
+Left Stack: _, Current State: q7, Right Stack: x$11
+Depth 10:
+Left Stack: _x, Current State: q5s, Right Stack: xx1
+Left Stack: _x, Current State: q6, Right Stack: x$1
+Left Stack: __, Current State: q5x, Right Stack: $11
+Depth 11:
+Left Stack: _xx, Current State: q5s, Right Stack: x1
+Left Stack: _, Current State: q6, Right Stack: xx$1
+Left Stack: __$, Current State: q5x, Right Stack: 11
+Depth 12:
+Left Stack: _xxx, Current State: q5s, Right Stack: 1
+Left Stack: , Current State: q6, Right Stack: _xx$1
+Left Stack: __, Current State: q6, Right Stack: $x1
+Depth 13:
+Left Stack: _xx, Current State: q6, Right Stack: x$
+Left Stack: _, Current State: q7, Right Stack: xx$1
+Left Stack: _, Current State: q6, Right Stack: _$x1
+Depth 14:
+Left Stack: _x, Current State: q6, Right Stack: xx$
+Left Stack: __, Current State: q5x, Right Stack: x$1
+Left Stack: __, Current State: q7, Right Stack: $x1
+Depth 15:
+Left Stack: _, Current State: q6, Right Stack: xxx$
+Left Stack: ___, Current State: q5x, Right Stack: $1
+Left Stack: ___, Current State: q5s, Right Stack: x1
+Depth 16:
+Left Stack: , Current State: q6, Right Stack: _xxx$
+Left Stack: ___$, Current State: q5x, Right Stack: 1
+Left Stack: ___x, Current State: q5s, Right Stack: 1
+Depth 17:
+Left Stack: _, Current State: q7, Right Stack: xxx$
+Left Stack: ___, Current State: q6, Right Stack: $x
+Left Stack: ___, Current State: q6, Right Stack: x$
+Depth 18:
+Left Stack: __, Current State: q5x, Right Stack: xx$
+Left Stack: __, Current State: q6, Right Stack: _$x
+Left Stack: __, Current State: q6, Right Stack: _x$
+Depth 19:
+Left Stack: ___, Current State: q5x, Right Stack: x$
+Left Stack: ___, Current State: q7, Right Stack: $x
+Left Stack: ___, Current State: q7, Right Stack: x$
+Depth 20:
+Left Stack: ____, Current State: q5x, Right Stack: $
+Left Stack: ____, Current State: q5s, Right Stack: x
+Left Stack: ____, Current State: q5x, Right Stack: $
+Depth 21:
+Left Stack: ____$, Current State: q5x, Right Stack: 
+Left Stack: ____x, Current State: q5s, Right Stack: 
+Left Stack: ____$, Current State: q5x, Right Stack: 
+Depth 22:
+Left Stack: ____, Current State: qreject, Right Stack: $_
+Left Stack: ____, Current State: qaccept, Right Stack: x_
+Left Stack: ____, Current State: qreject, Right Stack: $_
+Tracing NTM: check_composite on input '111111'
+
+Accepted. String was accepted at a depth of 27 with configuration: ['_____', 'qaccept', 'x_'] by simulating 100 transitions.
+
+Degree of Nondeterminism: 1.0416666666666667
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q1, Right Stack: 111111
+Depth 1:
+Left Stack: $, Current State: q2, Right Stack: 11111
+Depth 2:
+Left Stack: $x, Current State: q3, Right Stack: 1111
+Depth 3:
+Left Stack: $xx, Current State: q3, Right Stack: 111
+Left Stack: $, Current State: q4, Right Stack: x1111
+Depth 4:
+Left Stack: $xxx, Current State: q3, Right Stack: 11
+Left Stack: $x, Current State: q4, Right Stack: x111
+Left Stack: , Current State: q4, Right Stack: $x1111
+Depth 5:
+Left Stack: $xxxx, Current State: q3, Right Stack: 1
+Left Stack: $xx, Current State: q4, Right Stack: x11
+Left Stack: $, Current State: q4, Right Stack: xx111
+Left Stack: _, Current State: q5s, Right Stack: x1111
+Depth 6:
+Left Stack: $xxxxx, Current State: q3, Right Stack: 
+Left Stack: $xxx, Current State: q4, Right Stack: x1
+Left Stack: $x, Current State: q4, Right Stack: xx11
+Left Stack: , Current State: q4, Right Stack: $xx111
+Left Stack: _x, Current State: q5s, Right Stack: 1111
+Depth 7:
+Left Stack: $xx, Current State: q4, Right Stack: xx1
+Left Stack: $, Current State: q4, Right Stack: xxx11
+Left Stack: _, Current State: q5s, Right Stack: xx111
+Left Stack: _, Current State: q6, Right Stack: x$111
+Depth 8:
+Left Stack: $x, Current State: q4, Right Stack: xxx1
+Left Stack: , Current State: q4, Right Stack: $xxx11
+Left Stack: _x, Current State: q5s, Right Stack: x111
+Left Stack: , Current State: q6, Right Stack: _x$111
+Depth 9:
+Left Stack: $, Current State: q4, Right Stack: xxxx1
+Left Stack: _, Current State: q5s, Right Stack: xxx11
+Left Stack: _xx, Current State: q5s, Right Stack: 111
+Left Stack: _, Current State: q7, Right Stack: x$111
+Depth 10:
+Left Stack: , Current State: q4, Right Stack: $xxxx1
+Left Stack: _x, Current State: q5s, Right Stack: xx11
+Left Stack: _x, Current State: q6, Right Stack: x$11
+Left Stack: __, Current State: q5x, Right Stack: $111
+Depth 11:
+Left Stack: _, Current State: q5s, Right Stack: xxxx1
+Left Stack: _xx, Current State: q5s, Right Stack: x11
+Left Stack: _, Current State: q6, Right Stack: xx$11
+Left Stack: __$, Current State: q5x, Right Stack: 111
+Depth 12:
+Left Stack: _x, Current State: q5s, Right Stack: xxx1
+Left Stack: _xxx, Current State: q5s, Right Stack: 11
+Left Stack: , Current State: q6, Right Stack: _xx$11
+Left Stack: __, Current State: q6, Right Stack: $x11
+Depth 13:
+Left Stack: _xx, Current State: q5s, Right Stack: xx1
+Left Stack: _xx, Current State: q6, Right Stack: x$1
+Left Stack: _, Current State: q7, Right Stack: xx$11
+Left Stack: _, Current State: q6, Right Stack: _$x11
+Depth 14:
+Left Stack: _xxx, Current State: q5s, Right Stack: x1
+Left Stack: _x, Current State: q6, Right Stack: xx$1
+Left Stack: __, Current State: q5x, Right Stack: x$11
+Left Stack: __, Current State: q7, Right Stack: $x11
+Depth 15:
+Left Stack: _xxxx, Current State: q5s, Right Stack: 1
+Left Stack: _, Current State: q6, Right Stack: xxx$1
+Left Stack: ___, Current State: q5x, Right Stack: $11
+Left Stack: ___, Current State: q5s, Right Stack: x11
+Depth 16:
+Left Stack: _xxx, Current State: q6, Right Stack: x$
+Left Stack: , Current State: q6, Right Stack: _xxx$1
+Left Stack: ___$, Current State: q5x, Right Stack: 11
+Left Stack: ___x, Current State: q5s, Right Stack: 11
+Depth 17:
+Left Stack: _xx, Current State: q6, Right Stack: xx$
+Left Stack: _, Current State: q7, Right Stack: xxx$1
+Left Stack: ___, Current State: q6, Right Stack: $x1
+Left Stack: ___, Current State: q6, Right Stack: x$1
+Depth 18:
+Left Stack: _x, Current State: q6, Right Stack: xxx$
+Left Stack: __, Current State: q5x, Right Stack: xx$1
+Left Stack: __, Current State: q6, Right Stack: _$x1
+Left Stack: __, Current State: q6, Right Stack: _x$1
+Depth 19:
+Left Stack: _, Current State: q6, Right Stack: xxxx$
+Left Stack: ___, Current State: q5x, Right Stack: x$1
+Left Stack: ___, Current State: q7, Right Stack: $x1
+Left Stack: ___, Current State: q7, Right Stack: x$1
+Depth 20:
+Left Stack: , Current State: q6, Right Stack: _xxxx$
+Left Stack: ____, Current State: q5x, Right Stack: $1
+Left Stack: ____, Current State: q5s, Right Stack: x1
+Left Stack: ____, Current State: q5x, Right Stack: $1
+Depth 21:
+Left Stack: _, Current State: q7, Right Stack: xxxx$
+Left Stack: ____$, Current State: q5x, Right Stack: 1
+Left Stack: ____x, Current State: q5s, Right Stack: 1
+Left Stack: ____$, Current State: q5x, Right Stack: 1
+Depth 22:
+Left Stack: __, Current State: q5x, Right Stack: xxx$
+Left Stack: ____, Current State: q6, Right Stack: $x
+Left Stack: ____, Current State: q6, Right Stack: x$
+Left Stack: ____, Current State: q6, Right Stack: $x
+Depth 23:
+Left Stack: ___, Current State: q5x, Right Stack: xx$
+Left Stack: ___, Current State: q6, Right Stack: _$x
+Left Stack: ___, Current State: q6, Right Stack: _x$
+Left Stack: ___, Current State: q6, Right Stack: _$x
+Depth 24:
+Left Stack: ____, Current State: q5x, Right Stack: x$
+Left Stack: ____, Current State: q7, Right Stack: $x
+Left Stack: ____, Current State: q7, Right Stack: x$
+Left Stack: ____, Current State: q7, Right Stack: $x
+Depth 25:
+Left Stack: _____, Current State: q5x, Right Stack: $
+Left Stack: _____, Current State: q5s, Right Stack: x
+Left Stack: _____, Current State: q5x, Right Stack: $
+Left Stack: _____, Current State: q5s, Right Stack: x
+Depth 26:
+Left Stack: _____$, Current State: q5x, Right Stack: 
+Left Stack: _____x, Current State: q5s, Right Stack: 
+Left Stack: _____$, Current State: q5x, Right Stack: 
+Left Stack: _____x, Current State: q5s, Right Stack: 
+Depth 27:
+Left Stack: _____, Current State: qreject, Right Stack: $_
+Left Stack: _____, Current State: qaccept, Right Stack: x_
+Left Stack: _____, Current State: qreject, Right Stack: $_
+Left Stack: _____, Current State: qaccept, Right Stack: x_

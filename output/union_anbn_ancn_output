@@ -1,0 +1,62 @@
+Tracing NTM: union_anbn_ancn on input 'aaabbb'
+
+Accepted. String was accepted at a depth of 25 with configuration: ['XXXYYY_', 'qaccept', ''] by simulating 28 transitions.
+
+Degree of Nondeterminism: 1.037037037037037
+NTM Tree Path:
+
+Depth 0:
+Left Stack: , Current State: q0, Right Stack: aaabbb
+Depth 1:
+Left Stack: X, Current State: q1, Right Stack: aabbb
+Left Stack: X, Current State: q5, Right Stack: aabbb
+Depth 2:
+Left Stack: Xa, Current State: q1, Right Stack: abbb
+Left Stack: Xa, Current State: q5, Right Stack: abbb
+Depth 3:
+Left Stack: Xaa, Current State: q1, Right Stack: bbb
+Left Stack: Xaa, Current State: q5, Right Stack: bbb
+Depth 4:
+Left Stack: Xa, Current State: q2, Right Stack: aYbb
+Depth 5:
+Left Stack: X, Current State: q2, Right Stack: aaYbb
+Depth 6:
+Left Stack: , Current State: q2, Right Stack: XaaYbb
+Depth 7:
+Left Stack: X, Current State: q3, Right Stack: aaYbb
+Depth 8:
+Left Stack: XX, Current State: q1, Right Stack: aYbb
+Depth 9:
+Left Stack: XXa, Current State: q1, Right Stack: Ybb
+Depth 10:
+Left Stack: XXaY, Current State: q1, Right Stack: bb
+Depth 11:
+Left Stack: XXa, Current State: q2, Right Stack: YYb
+Depth 12:
+Left Stack: XX, Current State: q2, Right Stack: aYYb
+Depth 13:
+Left Stack: X, Current State: q2, Right Stack: XaYYb
+Depth 14:
+Left Stack: XX, Current State: q3, Right Stack: aYYb
+Depth 15:
+Left Stack: XXX, Current State: q1, Right Stack: YYb
+Depth 16:
+Left Stack: XXXY, Current State: q1, Right Stack: Yb
+Depth 17:
+Left Stack: XXXYY, Current State: q1, Right Stack: b
+Depth 18:
+Left Stack: XXXY, Current State: q2, Right Stack: YY
+Depth 19:
+Left Stack: XXX, Current State: q2, Right Stack: YYY
+Depth 20:
+Left Stack: XX, Current State: q2, Right Stack: XYYY
+Depth 21:
+Left Stack: XXX, Current State: q3, Right Stack: YYY
+Depth 22:
+Left Stack: XXXY, Current State: q4, Right Stack: YY
+Depth 23:
+Left Stack: XXXYY, Current State: q4, Right Stack: Y
+Depth 24:
+Left Stack: XXXYYY, Current State: q4, Right Stack: 
+Depth 25:
+Left Stack: XXXYYY_, Current State: qaccept, Right Stack: 
