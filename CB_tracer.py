@@ -28,100 +28,88 @@ def parse_csv(file_path):
         'reject_state': reject_state,
         'transitions': transitions, }
 
-def ntm_tracer(machine, input_string, max_depth=None): #follows same logic as ntm_trace.py program given though I just didnt understand the 'cite' comments
-    #perform BFS of NTM
+def ntm_tracer(machine, input_string, max_depth=None):
     print(f"Tracing NTM: {machine['name']} on input '{input_string}'")
-    initial_config = (machine['start_state'], input_string, 0) #DIFFERERNT from given prog. (state, input_string, head_location)
-    tree = [[initial_config]] #list of list of configs
+    #initlization
+    initial_config =(machine['start_state'], input_string, 0)
+    tree= [[initial_config]]  #list of levels
+    transitions =machine['transitions']
     accept_state = machine['accept_state']
     reject_state = machine['reject_state']
-    transitions = machine ['transitions']
 
-    #Vars that will change after going through tree
-    total_configs =0
     total_transitions = 0
-    accept_configs =0 
-    reject_configs =0
-    curr_depth =0
+    curr_depth = 0
     transition_log = []
-    branch_points =0 #keep track of how many states had more than 1 possible transition (Nondeterminisitc bracnhign points/level of nondeterminism)
 
-
-    while tree: #will need to iterate throuhg eavery configuration
-        curr_level = tree.pop(0)
-        next_level = []
-        print(f"Depth {curr_depth}, Current Level:  {len(curr_level)} configurations")
-        for state, tape, head_position in curr_level:
-            total_configs +=1 #keep track of processed configs
-            #iterate through level and check if accept/reject to proceed
-            if state ==accept_state:
-                accept_configs+=1
-                print("\n String is accepted!")
-                print(f"Accepted at depth: {curr_depth}")
-                print(f"Total configurations: {total_configs}")
-                print(f"Accepted configurations: {accept_configs}")
-                print(f"Rejected configurations: {reject_configs}")
-                print(f"Level of nondeterminism: {total_transitions/(branch_points or 1):.2f}")
-                print("\nTransition Log:")
-                for t in transition_log:
-                    print(" ", t)
-                return curr_depth
-
-            if state ==reject_state:
-                reject_configs +=1
-                continue 
-            #determine current read symbol
-            if 0 <= head_position <len(tape):
-                head_char = tape[head_position]   
-            else:
-                head_char = "_"   #blank if go beyond tape       
-
-            possible = transitions.get((state,head_char),[]) #possible transitions for the state and symbol/char
-            # count nondeterminism 
-            if len(possible) >1:
-                branch_points += 1
-            #generate nxt configuraions for THIS config
-            
-            for next_state, write_char, move_direction in possible:
-                #initilaize modifiable tape list
-                tape_list = list(tape)
-
-                #write symbol
-                if 0 <= head_position < len(tape_list):
-                    tape_list[head_position]=write_char
-                else: #headis beyond the tape --need to extend
-                    tape_list.append(write_char)
-                #move head L or R
-                if move_direction == 'R': #usually we always go right first
-                    update_head = head_position +1
-                else:
-                    update_head =head_position-1
-
-                #convert tape back to strign
-                new_tape = ''.join(tape_list)
-                #save new config
-                next_config= (next_state,new_tape, update_head)
-                next_level.append(next_config)
-                #log the transiton
-                transition_log.append(f"({state}, {head_char}) -> ({next_state}, {write_char},  {move_direction})")
-
-            total_transitions +=len(possible)
-
-        #if no more configs, then we cant reach any accept stae
-        if not next_level:
-            print("\nString is rejected.")
-            print(f"Stopped at depth: {curr_depth}") #no more configs
-            print(f"Total configurations: {total_configs}")
-            print(f"Accepted: {accept_configs}")
-            print(f"Rejected: {reject_configs}")
-            print("\nTransition Log:")
-            for t in transition_log:
-                print(" ", t)
+    while tree:
+        if max_depth is not None and curr_depth > max_depth: #limitation check (max depth limit)
+            print(f"Execution stopped after {max_depth} steps.")
             return None
 
-        # add  next level to BFS tree
+        curr_level = tree.pop(0)
+        next_level = []
+
+        print(f"Level {curr_depth}:") #follo woutput instructions
+        for state,tape, head in curr_level:
+            
+            if head >= 0:
+                left = tape[:head]
+            else:
+                left = ""
+
+            if head >= 0 and head < len(tape):
+                head_char = tape[head]
+            else:
+                head_char = "_"
+
+            if head + 1 < len(tape):
+                right = tape[head + 1:]
+            else:
+                right = ""
+            print(f"{left} {state} {head_char} {right}")
+
+            #CHECK STATES
+            if state == accept_state:
+                print(f"\nString accepted in {curr_depth} steps")
+                print(f"Total transitions: {total_transitions}")
+                return curr_depth
+            if state == reject_state:
+                continue
+
+            #determine current symbol
+            if 0 <= head < len(tape):
+                symbol = tape[head]
+            else:
+                symbol = "_"
+
+#possible transitons for curr state and symbol
+            possible = transitions.get((state, symbol), [])
+            total_transitions += len(possible)
+
+            #generate next configs
+            for next_state, write_char, move_dir in possible:
+                new_tape = list(tape)  #make tape modifiable  (coulf get neew configs)
+                if 0 <= head < len(new_tape):
+                    new_tape[head] = write_char
+                else:
+                    new_tape.append(write_char)
+
+                #move head --usually we go right first--first check
+                if move_dir == "R":
+                    new_head = head + 1
+                else:
+                    new_head = head - 1                
+                next_level.append((next_state, ''.join(new_tape), new_head))
+                transition_log.append(f"({state}, {symbol}) -> ({next_state}, { write_char}, {move_dir})") 
+
+        if not next_level:
+            print(f"\nString rejected in {curr_depth} steps")
+            print(f"Total transitions: {total_transitions}")
+            return None
+
         tree.append(next_level)
         curr_depth += 1
+
 
 #TBD test code/program
 machine_input = input('Select file to run\n').strip() #user types
@@ -129,7 +117,7 @@ machine_input = f"input/{machine_input}" #search wuthin the input folder
 max_depth = 15 #termination limit
 machine = parse_csv(machine_input)
 #ask user for the input string instead of reading it from the CSV
-string = input("Enter the input string to run on this machine:\n").strip()
+string = input("Enter the input string for this machine:\n").strip()
 
 print(f"Running Simulation for: {string}")
 result = ntm_tracer(machine, string, max_depth)
