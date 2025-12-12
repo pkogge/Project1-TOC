@@ -33,7 +33,7 @@ class NTM_Tracer(TuringMachineSimulator):
             print(f"Level {depth}")
             for config in current_level:
                 left, state, right = config
-                # Visual format: Left State Right
+                # Visual format: Left, State, Right
                 display_right = right if right else BLANK
                 print(f"{left} {state} {display_right}")
 
@@ -95,7 +95,7 @@ class NTM_Tracer(TuringMachineSimulator):
                     next_level.append([new_left, next_state, new_right])
                     total_transitions += 1
 
-            # If no configurations exist in next level, all branches died -> Reject
+            # If no configurations exist in next level, all branches died then Reject
             if not next_level:
                 print(f"String rejected in {depth}")
                 print(f"Total transitions simulated: {total_transitions}")
