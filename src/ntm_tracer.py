@@ -34,7 +34,31 @@ class NTM_Tracer(TuringMachineSimulator):
                 head_char = right[0] if right else "_"
                 rest_right = right[1:] if right else ""
                 print(f"{left} {state} {head_char}{rest_right}")
+                
+                
+            for config in current_level: #Iterate through every config in current_level.
+                left, state, right = config
+                
+                
+                if state == self.accept_state: #Check if config is Accept
+                    print(f"String accepted in {depth}")
+                    accepted = True
+                    return
 
+                 
+                if state == self.reject_state: #Check if config is Reject
+                    continue 
+
+                all_rejected = False # Found at least one non-reject state to process
+                
+                # Determine character under head (treat empty right as blank '_')
+                head_char = right[0] if len(right) > 0 else "_"
+                
+                # If not Accept/Reject, find valid transitions in self.transitions.
+                # Key is (current_state, read_char). handle wildcard if necessary, but we want standard lookup first.
+                transitions = self.transitions.get((state, head_char), [])
+                
+                
             # TODO: STUDENT IMPLEMENTATION NEEDED
             # 1. Iterate through every config in current_level.
             # 2. Check if config is Accept (Stop and print success) [cite: 179]
