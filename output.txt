@@ -1,0 +1,156 @@
+Tracing NTM: a plus test (TEST 1) on input 'aaa'
+Accepted, aaa was accepted after 4 steps with a total of 9 transitions.
+
+Start:
+Level: 0
+ s0 $aaa_
+Level: 1
+$ s1 aaa_
+Level: 2
+$a s1 aa_
+Level: 3
+$aaa s2 _
+Level: 4
+$aa s3 a_
+End
+
+Tracing NTM: Composite Number Tester (TEST 2) on input '111111'
+Accepted, 111111 was accepted after 31 steps with a total of 110 transitions.
+
+Start:
+Level: 0
+ s0 $111111_
+Level: 1
+$ s1 111111_
+Level: 2
+$y s2 11111_
+Level: 3
+$yx s3 1111_
+Level: 4
+$yx s4 x111_
+Level: 5
+$y s4 xx111_
+Level: 6
+$ s4 yxx111_
+Level: 7
+$_ s5s xx111_
+Level: 8
+$_x s5s x111_
+Level: 9
+$_xx s5s 111_
+Level: 10
+$_x s6 xy11_
+Level: 11
+$_ s6 xxy11_
+Level: 12
+$ s6 _xxy11_
+Level: 13
+$_ s7 xxy11_
+Level: 14
+$__ s5x xy11_
+Level: 15
+$__x s5x y11_
+Level: 16
+$__xy s5x 11_
+Level: 17
+$__x s6 yx1_
+Level: 18
+$__ s6 xyx1_
+Level: 19
+$_ s6 _xyx1_
+Level: 20
+$__ s7 xyx1_
+Level: 21
+$___ s5x yx1_
+Level: 22
+$___y s5x x1_
+Level: 23
+$___yx s5x 1_
+Level: 24
+$___y s6 xx_
+Level: 25
+$___ s6 yxx_
+Level: 26
+$__ s6 _yxx_
+Level: 27
+$___ s7 yxx_
+Level: 28
+$____ s5s xx_
+Level: 29
+$____x s5s x_
+Level: 30
+$____xx s5s _
+Level: 31
+$____x sA x_
+End
+
+Tracing NTM: ZeroNOneN (TEST 3) on input '00111'
+Rejected, 00111 was rejected after 31 steps with a total of 33 transitions
+
+Start:
+Level: 0
+ s0 $00111_
+Level: 1
+$ s1 00111_
+Level: 2
+$0 s1 0111_
+Level: 3
+$00 s1 111_
+Level: 4
+$001 s2 11_
+Level: 5
+$0011 s2 1_
+Level: 6
+$00111 s2 _
+Level: 7
+$0011 s3 1_
+Level: 8
+$001 s3 11_
+Level: 9
+$00 s3 111_
+Level: 10
+$0 s3 0111_
+Level: 11
+$ s3 00111_
+Level: 12
+ s3 $00111_
+Level: 13
+$ s4 00111_
+Level: 14
+$X s5 0111_
+Level: 15
+$X0 s5 111_
+Level: 16
+$X s6 0X11_
+Level: 17
+$ s6 X0X11_
+Level: 18
+ s6 $X0X11_
+Level: 19
+$ s4 X0X11_
+Level: 20
+$X s4 0X11_
+Level: 21
+$XX s5 X11_
+Level: 22
+$XXX s5 11_
+Level: 23
+$XX s6 XX1_
+Level: 24
+$X s6 XXX1_
+Level: 25
+$ s6 XXXX1_
+Level: 26
+ s6 $XXXX1_
+Level: 27
+$ s4 XXXX1_
+Level: 28
+$X s4 XXX1_
+Level: 29
+$XX s4 XX1_
+Level: 30
+$XXX s4 X1_
+Level: 31
+$XXXX s4 1_
+End
+
