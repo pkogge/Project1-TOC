@@ -33,7 +33,7 @@ class NTM_Tracer(TuringMachineSimulator):
             print(f"Level {depth}")
             for config in current_level:
                 left, state, right = config
-                # Visual format: Left State Right (use underscore for empty tape representation if needed)
+                # Visual format: Left State Right
                 display_right = right if right else BLANK
                 print(f"{left} {state} {display_right}")
 
@@ -55,7 +55,7 @@ class NTM_Tracer(TuringMachineSimulator):
                 # Identify character under head
                 head_char = right[0] if len(right) > 0 else BLANK
 
-                # Use helper to find valid transitions (returns list of dicts)
+                # Use helper to find valid transitions
                 # Helper expects tuple for k-tape compatibility
                 valid_moves = self.get_transitions(state, (head_char,))
 
@@ -66,7 +66,7 @@ class NTM_Tracer(TuringMachineSimulator):
                     write_char = move['write'][0]
                     direction = move['move'][0]
 
-                    # Handle Wildcard Write: '*' means do not change the character 
+                    # Handle wildcard write '*' means do not change the character 
                     if write_char == WILDCARD:
                         write_char = head_char
 
@@ -97,13 +97,15 @@ class NTM_Tracer(TuringMachineSimulator):
 
             # If no configurations exist in next level, all branches died -> Reject
             if not next_level:
-                print(f"String rejected in {depth}") 
+                print(f"String rejected in {depth}")
+                print(f"Total transitions simulated: {total_transitions}")
                 return
 
             tree.append(next_level)
             depth += 1
 
-        print(f"Execution stopped after {max_depth} steps.") 
+        print(f"Execution stopped after {max_depth} steps.")
+        print(f"Total transitions simulated: {total_transitions}")
 
     def print_trace_path(self, final_node):
         pass
