@@ -19,3 +19,6 @@ def main():
         # Program 2 (k-tape)
         ktape = KTape_DTM(args.file)
         ktape.run(args.input_string, args.max_depth)
+
+if __name__ == "__main__":
+    main()
