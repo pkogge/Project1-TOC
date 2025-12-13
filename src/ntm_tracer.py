@@ -79,11 +79,15 @@ class NTM_Tracer(TuringMachineSimulator):
 
                 if not valid_transition:
 
+                    self._nonleaf_configs += 1
+                    self._outgoing_transitions += 1
+
                     child_node = [left_node, self.reject_state, right_node, parent_node, -1]
                     next_level.append(child_node)
                     self._transitions_simulated += 1
 
                     continue
+
 
                 self._nonleaf_configs += 1
                 self._outgoing_transitions += len(valid_transition)
@@ -121,7 +125,7 @@ class NTM_Tracer(TuringMachineSimulator):
                     else:
                         
                         new_left_node = left_node
-                        
+
                         new_right_node = right_written
 
                     child_node = [new_left_node, next_state, new_right_node, parent_node, transition_idx]
