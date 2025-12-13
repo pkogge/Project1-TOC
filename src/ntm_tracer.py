@@ -1,6 +1,5 @@
 from src.helpers.turing_machine import TuringMachineSimulator
 
-
 # ==========================================
 # PROGRAM 1: Nondeterministic TM
 # ==========================================
@@ -15,7 +14,6 @@ class NTM_Tracer(TuringMachineSimulator):
         self.blank_symbol = '_'
 
         # Initial Configuration: ["", start_state, input_string]
-        # Note: Represent configuration as triples (left, state, right)
         initial_config = [[], self.start_state, list(input_string)]
 
         # The tree is a list of lists of configurations
@@ -23,17 +21,18 @@ class NTM_Tracer(TuringMachineSimulator):
 
         depth = 0
         accepted = False
+        
+        non_leaf_count = 0 
 
         while depth < max_depth and not accepted:
             current_level = tree[-1]
             next_level = []
             all_rejected = True
 
-            # TODO: STUDENT IMPLEMENTATION NEEDED
             # 1. Iterate through every config in current_level.
             if depth == 0:
                 self.simulated_transitions = 0
-                print("[", end="") # Start of the tree list
+                print("[", end="") 
 
             display_level = []
             for c in current_level:
@@ -54,6 +53,12 @@ class NTM_Tracer(TuringMachineSimulator):
                     print(f'String accepted in {depth}')
                     print(f'Total transitions simulated: {self.simulated_transitions}')
                     
+                    if non_leaf_count > 0:
+                        score = self.simulated_transitions / non_leaf_count
+                    else:
+                        score = 1.0 # Default if no branching occurred
+                    print(f'Degree of Nondeterminism: {score:.2f}')
+
                     path = []
                     curr_node = config
                     while curr_node:
@@ -71,27 +76,35 @@ class NTM_Tracer(TuringMachineSimulator):
 
                     accepted = True
                     break
+            
             # 3. Check if config is Reject (Stop this branch only)
                 if state == self.reject_state:
                     continue
+            
             # 4. If not Accept/Reject, find valid transitions in self.transitions.
                 curr = (right[0],) if right else (self.blank_symbol,)
                 valid = False
 
+                transition_found = False
 
                 for src, tr_list in self.transitions.items():
+                    if state == self.reject_state:
+                        continue
+
                     if src != state:
                         continue
 
                     for t in tr_list:
+                        
                         read_ch = t['read']
                         dst = t['next']
                         write_ch = t['write']
                         direction = t['move'][0]
 
-
                         if read_ch != curr:
                             continue
+
+                        transition_found = True
 
                         valid = True
                         all_rejected = False
@@ -104,8 +117,6 @@ class NTM_Tracer(TuringMachineSimulator):
                             new_right[0] = write_ch[0]
                         else:
                             new_right = [write_ch[0]]
-            # 5. If no explicit transition exists, treat as implicit Reject.
-            # 6. Generate children configurations and append to next_level.
 
                         if direction == 'R':
                             if new_right:
@@ -124,19 +135,29 @@ class NTM_Tracer(TuringMachineSimulator):
                         next_config = (new_left, dst, new_right, config)
                         next_level.append(next_config)
 
+                    if not transition_found:
+                        reject_node = [left, self.reject_state, right]
+                        next_level.append(reject_node)
+                        self.simulated_transitions += 1
+                        valid = True
 
-                if not valid:
-                    continue
+                # 5. Track Non-Leaves
+                if valid:
+                    non_leaf_count += 1
 
             if accepted:
                 return
             
-
             if not next_level and all_rejected:
-                # TODO: Handle "String rejected" output
                 print("]")
                 print(f"String rejected in {depth}")
                 print(f"Total transitions simulated: {self.simulated_transitions}")
+                
+                if non_leaf_count > 0:
+                    score = self.simulated_transitions / non_leaf_count
+                else:
+                    score = 1.0
+                print(f'Degree of Nondeterminism: {score:.2f}')
                 break
 
             tree.append(next_level)
@@ -144,11 +165,7 @@ class NTM_Tracer(TuringMachineSimulator):
 
         if depth >= max_depth:
             print("]")
-            print(f"Execution stopped after {max_depth} steps.")  #
-
+            print(f"Execution stopped after {max_depth} steps.")
+    
     def print_trace_path(self, final_node):
-        """
-        Backtrack and print the path from root to the accepting node.
-        Ref: Section 4.2
-        """
         pass
