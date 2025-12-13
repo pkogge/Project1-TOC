@@ -1,0 +1,31 @@
+Tracing NTM: Composite_tester on input '111111'
+String accepted in 27
+Degree of Nondeterminism: 1.03
+, q1, 1, 11111
+$, q2, 1, 1111
+$x, q3, 1, 111
+$xx, q3, 1, 11
+$xxx, q3, 1, 1
+$xx, q4, x, 11
+$x, q4, x, x11
+$, q4, x, xx11
+, q4, $, xxx11
+_, q5s, x, xx11
+_x, q5s, x, x11
+_xx, q5s, x, 11
+_xxx, q5s, 1, 1
+_xx, q6, x, $1
+_x, q6, x, x$1
+_, q6, x, xx$1
+, q6, _, xxx$1
+_, q7, x, xx$1
+__, q5x, x, x$1
+___, q5x, x, $1
+____, q5x, $, 1
+____$, q5x, 1, 
+____, q6, $, x
+___, q6, _, $x
+____, q7, $, x
+_____, q5s, x, 
+_____x, q5s, _, 
+_____, qacc, x, _
