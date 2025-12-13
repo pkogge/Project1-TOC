@@ -1,54 +1,157 @@
 from src.helpers.turing_machine import TuringMachineSimulator
-
-
 # ==========================================
-# PROGRAM 1: Nondeterministic TM [cite: 137]
+# PROGRAM 1: Nondeterministic TM
 # ==========================================
 class NTM_Tracer(TuringMachineSimulator):
+    """
+    simulates a NTM using BFS
+    """
+    def __init__(self, config_source):
+        if isinstance(config_source, dict):
+            self.load_machine_from_dict(config_source)
+        else:
+            super().__init__(config_source)
+
     def run(self, input_string, max_depth):
         """
-        Performs a Breadth-First Search (BFS) trace of the NTM.
-        Ref: Section 4.1 "Trees as List of Lists" [cite: 146]
+        performs a BFS trace of the NTM computation tree
         """
-        print(f"Tracing NTM: {self.machine_name} on input '{input_string}'")
-
-        # Initial Configuration: ["", start_state, input_string]
-        # Note: Represent configuration as triples (left, state, right) [cite: 156]
+        print(f"tracing NTM: {self.machine_name} on input '{input_string}'")
+        
+        # cfg: [left_tape, state, right_tape]
         initial_config = ["", self.start_state, input_string]
+        
+        # tree: list of levels
+        computation_tree = [[initial_config]] 
 
-        # The tree is a list of lists of configurations
-        tree = [[initial_config]]
+        # depth counter
+        current_depth = 0
+        accepted_flag = False # unused in while loop, but kept for context
 
-        depth = 0
-        accepted = False
+        while current_depth < max_depth and not accepted_flag:
+            current_level_nodes = computation_tree[-1]
+            next_level_nodes = []
+            all_branches_rejected = True # tracks if all paths halt or reject
 
-        while depth < max_depth and not accepted:
-            current_level = tree[-1]
-            next_level = []
-            all_rejected = True
+            for node in current_level_nodes:
+                # get cfg and parent info
+                if isinstance(node, dict):
+                    current_cfg = node["config"]
+                    parent_node = node
+                else:
+                    current_cfg = node
+                    parent_node = None
 
-            # TODO: STUDENT IMPLEMENTATION NEEDED
-            # 1. Iterate through every config in current_level.
-            # 2. Check if config is Accept (Stop and print success) [cite: 179]
-            # 3. Check if config is Reject (Stop this branch only) [cite: 181]
-            # 4. If not Accept/Reject, find valid transitions in self.transitions.
-            # 5. If no explicit transition exists, treat as implicit Reject.
-            # 6. Generate children configurations and append to next_level[cite: 148].
+                left, state, right = current_cfg
 
-            # Placeholder for logic:
-            if not next_level and all_rejected:
-                # TODO: Handle "String rejected" output [cite: 258]
-                break
+                # check halting states
+                
+                # accept
+                if state == self.accept_state:
+                    print(f"\nstring accepted in {current_depth}")
 
-            tree.append(next_level)
-            depth += 1
+                    
+                    total_children = sum(len(level) for level in computation_tree[1:])
+                    
+                    total_parents = sum(len(level) for level in computation_tree[:-1])
 
-        if depth >= max_depth:
-            print(f"Execution stopped after {max_depth} steps.")  # [cite: 259]
+                    
+                    degree = total_children / total_parents if total_parents > 0 else 0
+
+                    print(f"degree of nondeterminism: {degree:.2f}")
+                    self.print_trace_path(node) 
+                    return
+
+            
+                if state == self.reject_state:
+                    continue
+
+                
+                head_symbol = right[0] if right else "_"
+
+                
+                possible_moves = self.get_transitions(state, [head_symbol])
+
+                if possible_moves:
+                    all_branches_rejected = False 
+
+                for move in possible_moves:
+                    next_state = move["next"]
+                    write_char = move["write"][0]
+                    direction = move["move"][0]
+
+                    # tape remainder
+                    remaining_right = right[1:] if right else ""
+
+                    # calculate new tape cfg
+                    if direction == "L":
+                        if left:
+                            new_left = left[:-1]
+                            new_right = left[-1] + write_char + remaining_right
+                        else:
+                            
+                            new_left = ""
+                            new_right = write_char + remaining_right
+
+                    elif direction == "R":
+                        new_left = left + write_char
+                        new_right = remaining_right
+
+                    else:  
+                        new_left = left
+                        new_right = write_char + remaining_right
+
+                    next_cfg = [new_left, next_state, new_right]
+                    next_level_nodes.append({
+                        "config": next_cfg,
+                        "parent": node 
+                    })
+
+           
+            
+            # check for total rejection
+            if not next_level_nodes and all_branches_rejected:
+                print(f"\nstring rejected in {current_depth}")
+
+                # total children sum
+                total_children = sum(len(level) for level in computation_tree[1:])
+                # total parent sum (including current level here)
+                total_parents = sum(len(level) for level in computation_tree)
+                
+                # branching factor
+                degree = total_children / total_parents if total_parents > 0 else 0
+
+                print(f"degree of nondeterminism: {degree:.2f}")
+                return
+
+            
+            computation_tree.append(next_level_nodes)
+            current_depth += 1 
+
+        # hit max_depth limit
+        if current_depth >= max_depth:
+            print(f"\nexecution stopped after {max_depth} steps.")
 
     def print_trace_path(self, final_node):
         """
-        Backtrack and print the path from root to the accepting node.
-        Ref: Section 4.2 [cite: 165]
+        backtracks from accepting node and prints trace path
         """
-        pass
+        path_list = [] 
+        current_node = final_node 
+
+        # backtrack loop
+        while True:
+            if isinstance(current_node, dict):
+                path_list.append(current_node["config"])
+                current_node = current_node["parent"]
+            else:
+                path_list.append(current_node)
+                break
+
+        path_list.reverse()
+        print("\n--- acceptance path trace ---")
+
+        for left, state, right in path_list:
+            head = right[0] if right else "_"
+            rest = right[1:] if len(right) > 1 else ""
+            print(f"{left}, {state}, {head}, {rest}")
