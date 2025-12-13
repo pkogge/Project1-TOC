@@ -121,6 +121,7 @@ class NTM_Tracer(TuringMachineSimulator):
                     else:
                         
                         new_left_node = left_node
+                        
                         new_right_node = right_written
 
                     child_node = [new_left_node, next_state, new_right_node, parent_node, transition_idx]
@@ -208,7 +209,9 @@ class NTM_Tracer(TuringMachineSimulator):
         for lvl, config in path:
             
             left_node = config[0]
+
             state = config[1]
+
             right_node = config[2]
 
             if right_node:
