@@ -1,0 +1,8 @@
+Tracing NTM: a plus on input 'aaa'
+String accepted in 4
+Degree of Nondeterminism: 1.00
+, q1, a, aa
+a, q1, a, a
+aa, q1, a, 
+aaa, q2, _, 
+aa, q3, a, _
