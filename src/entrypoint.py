@@ -1,34 +1,21 @@
-import os
-from src.helpers.project_selection_enum import ProjectSelection
-from src.helpers.constants import CONFIGURATION_FILE_PATH, parse_config, INPUT_FILE
-from src.sat import SatSolver
-from src.bin_packing import BinPacking
-from src.graph_coloring import GraphColoring
-from src.hamilton_cycle import HamiltonCycleColoring
-from src.helpers.automation_helpers import brief_about_project
+from src.helpers.argument_input import parse_inputs
+from src.helpers.turing_machine import TuringMachineSimulator
+from src.ktape_dtm import KTape_DTM
+from src.ntm_tracer import NTM_Tracer
+
 
 def main():
     """
     Entry point for the project1_toc package.
     """
+    args = parse_inputs()
+    temp_sim = TuringMachineSimulator(args.file)
 
-    if not os.path.exists(CONFIGURATION_FILE_PATH):
-        brief_about_project()
-    selection, sub_problem = parse_config(CONFIGURATION_FILE_PATH)
-
-
-    if selection["name"] == ProjectSelection.sat.name:
-        solver = SatSolver(INPUT_FILE)
-    elif selection["name"] == ProjectSelection.bin_packing.name:
-        solver = BinPacking(INPUT_FILE)
-    elif selection["name"] == ProjectSelection.hamiltonian.name:
-        solver = HamiltonCycleColoring(INPUT_FILE)
-    elif selection["name"] == ProjectSelection.graph_coloring.name:
-        solver = GraphColoring(INPUT_FILE)
-    
-    if solver:
-        solver.run()
-
-
-    
-    
+    if temp_sim.num_tapes == 1:
+        # Assuming Program 1 (NTM) for single tape, though simple DTMs work here too [cite: 31]
+        ntm = NTM_Tracer(args.file)
+        ntm.run(args.input_string, args.max_depth)
+    else:
+        # Program 2 (k-tape)
+        ktape = KTape_DTM(args.file)
+        ktape.run(args.input_string, args.max_depth)
