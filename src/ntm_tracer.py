@@ -1,5 +1,6 @@
 from src.helpers.turing_machine import TuringMachineSimulator
-
+#NOTE: created new code file since it was created earlier but I was debating trasnfering it to fit this
+#however, prof said we could use our own code
 
 # ==========================================
 # PROGRAM 1: Nondeterministic TM [cite: 137]
