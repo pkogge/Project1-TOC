@@ -28,10 +28,8 @@ class NTM_Tracer(TuringMachineSimulator):
 
         depth = 0
         total_transitions = 0
-
         expanded_configs = 0
         generated_configs = 0
-
         accept_level = None
         accept_index = None
 
@@ -86,7 +84,6 @@ class NTM_Tracer(TuringMachineSimulator):
                     next_state = t["next"]
                     write_symbol = t["write"][0]
                     dir_to_move = t["move"][0]
-                    
                     # Configure based on direction head moves
                     if dir_to_move == DIR_R:
                         new_left = left + write_symbol
@@ -106,7 +103,6 @@ class NTM_Tracer(TuringMachineSimulator):
                     next_level.append([new_left, next_state, new_right, parent_index, t_id])
                     total_transitions += 1
                     generated_configs += 1
-
             degree = (generated_configs / expanded_configs if expanded_configs > 0 else 0.0)
 
             # If accept found at current depth, print necessary info
@@ -131,7 +127,6 @@ class NTM_Tracer(TuringMachineSimulator):
 
                 print(f"String rejected in {depth}")
                 return
-
             tree.append(next_level)
             depth += 1
 
