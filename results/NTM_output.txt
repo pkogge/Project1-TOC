@@ -1,0 +1,147 @@
+$ uv run main.py ./input/aplus.csv "aaaa"
+Tracing NTM: a plus on input 'aaaa'
+Tree Depth: 5
+Transitions simulated: 14
+Level 0: [['', 'q1', 'aaaa']]
+Level 1: [['a', 'q1', 'aaa'], ['a', 'q2', 'aaa']]
+Level 2: [['aa', 'q1', 'aa'], ['aa', 'q2', 'aa'], ['a', 'qreject', 'aaa']]
+Level 3: [['aaa', 'q1', 'a'], ['aaa', 'q2', 'a'], ['aa', 'qreject', 'aa']]
+Level 4: [['aaaa', 'q1', ''], ['aaaa', 'q2', ''], ['aaa', 'qreject', 'a']]
+Level 5: [['aaaa', 'qreject', ''], ['aaa', 'q3', 'a_']]
+String accepted in 5 transitions
+Level 0: '', 'q1', 'aaaa'
+Level 1: 'a', 'q1', 'aaa'
+Level 2: 'aa', 'q1', 'aa'
+Level 3: 'aaa', 'q1', 'a'
+Level 4: 'aaaa', 'q2', ''
+Level 5: 'aaa', 'q3', 'a_'
+
+$ uv run main.py ./input/composite.csv "1111111"
+Tracing NTM: Composite_tester on input '1111111'
+Tree Depth: 32
+Transitions simulated: 149
+Level 0: [['', 'q1', '1111111']]
+Level 1: [['$', 'q2', '111111']]
+Level 2: [['$x', 'q3', '11111']]
+Level 3: [['$xx', 'q3', '1111'], ['$', 'q4', 'x11111']]
+Level 4: [['$xxx', 'q3', '111'], ['$x', 'q4', 'x1111'], ['', 'q4', '$x11111']]
+Level 5: [['$xxxx', 'q3', '11'], ['$xx', 'q4', 'x111'], ['$', 'q4', 'xx1111'], ['_', 'q5s', 'x11111']]
+Level 6: [['$xxxxx', 'q3', '1'], ['$xxx', 'q4', 'x11'], ['$x', 'q4', 'xx111'], ['', 'q4', '$xx1111'], ['_x', 'q5s', '11111']]
+Level 7: [['$xxxxxx', 'q3', ''], ['$xxxx', 'q4', 'x1'], ['$xx', 'q4', 'xx11'], ['$', 'q4', 'xxx111'], ['_', 'q5s', 'xx1111'], ['_', 'q6', 'x$1111']]
+Level 8: [['$xxxxxx', 'qrej', ''], ['$xxx', 'q4', 'xx1'], ['$x', 'q4', 'xxx11'], ['', 'q4', '$xxx111'], ['_x', 'q5s', 'x1111'], ['', 'q6', '_x$1111']]
+Level 9: [['$xx', 'q4', 'xxx1'], ['$', 'q4', 'xxxx11'], ['_', 'q5s', 'xxx111'], ['_xx', 'q5s', '1111'], ['_', 'q7', 'x$1111']]
+Level 10: [['$x', 'q4', 'xxxx1'], ['', 'q4', '$xxxx11'], ['_x', 'q5s', 'xx111'], ['_x', 'q6', 'x$111'], ['__', 'q5x', '$1111']]
+Level 11: [['$', 'q4', 'xxxxx1'], ['_', 'q5s', 'xxxx11'], ['_xx', 'q5s', 'x111'], ['_', 'q6', 'xx$111'], ['__$', 'q5x', '1111']]
+Level 12: [['', 'q4', '$xxxxx1'], ['_x', 'q5s', 'xxx11'], ['_xxx', 'q5s', '111'], ['', 'q6', '_xx$111'], ['__', 'q6', '$x111']]
+Level 13: [['_', 'q5s', 'xxxxx1'], ['_xx', 'q5s', 'xx11'], ['_xx', 'q6', 'x$11'], ['_', 'q7', 'xx$111'], ['_', 'q6', '_$x111']]
+Level 14: [['_x', 'q5s', 'xxxx1'], ['_xxx', 'q5s', 'x11'], ['_x', 'q6', 'xx$11'], ['__', 'q5x', 'x$111'], ['__', 'q7', '$x111']]
+Level 15: [['_xx', 'q5s', 'xxx1'], ['_xxxx', 'q5s', '11'], ['_', 'q6', 'xxx$11'], ['___', 'q5x', '$111'], ['___', 'q5s', 'x111']]
+Level 16: [['_xxx', 'q5s', 'xx1'], ['_xxx', 'q6', 'x$1'], ['', 'q6', '_xxx$11'], ['___$', 'q5x', '111'], ['___x', 'q5s', '111']]
+Level 17: [['_xxxx', 'q5s', 'x1'], ['_xx', 'q6', 'xx$1'], ['_', 'q7', 'xxx$11'], ['___', 'q6', '$x11'], ['___', 'q6', 'x$11']]
+Level 18: [['_xxxxx', 'q5s', '1'], ['_x', 'q6', 'xxx$1'], ['__', 'q5x', 'xx$11'], ['__', 'q6', '_$x11'], ['__', 'q6', '_x$11']]
+Level 19: [['_xxxx', 'q6', 'x$'], ['_', 'q6', 'xxxx$1'], ['___', 'q5x', 'x$11'], ['___', 'q7', '$x11'], ['___', 'q7', 'x$11']]
+Level 20: [['_xxx', 'q6', 'xx$'], ['', 'q6', '_xxxx$1'], ['____', 'q5x', '$11'], ['____', 'q5s', 'x11'], ['____', 'q5x', '$11']]
+Level 21: [['_xx', 'q6', 'xxx$'], ['_', 'q7', 'xxxx$1'], ['____$', 'q5x', '11'], ['____x', 'q5s', '11'], ['____$', 'q5x', '11']]
+Level 22: [['_x', 'q6', 'xxxx$'], ['__', 'q5x', 'xxx$1'], ['____', 'q6', '$x1'], ['____', 'q6', 'x$1'], ['____', 'q6', '$x1']]
+Level 23: [['_', 'q6', 'xxxxx$'], ['___', 'q5x', 'xx$1'], ['___', 'q6', '_$x1'], ['___', 'q6', '_x$1'], ['___', 'q6', '_$x1']]
+Level 24: [['', 'q6', '_xxxxx$'], ['____', 'q5x', 'x$1'], ['____', 'q7', '$x1'], ['____', 'q7', 'x$1'], ['____', 'q7', '$x1']]
+Level 25: [['_', 'q7', 'xxxxx$'], ['_____', 'q5x', '$1'], ['_____', 'q5s', 'x1'], ['_____', 'q5x', '$1'], ['_____', 'q5s', 'x1']]
+Level 26: [['__', 'q5x', 'xxxx$'], ['_____$', 'q5x', '1'], ['_____x', 'q5s', '1'], ['_____$', 'q5x', '1'], ['_____x', 'q5s', '1']]
+Level 27: [['___', 'q5x', 'xxx$'], ['_____', 'q6', '$x'], ['_____', 'q6', 'x$'], ['_____', 'q6', '$x'], ['_____', 'q6', 'x$']]
+Level 28: [['____', 'q5x', 'xx$'], ['____', 'q6', '_$x'], ['____', 'q6', '_x$'], ['____', 'q6', '_$x'], ['____', 'q6', '_x$']]
+Level 29: [['_____', 'q5x', 'x$'], ['_____', 'q7', '$x'], ['_____', 'q7', 'x$'], ['_____', 'q7', '$x'], ['_____', 'q7', 'x$']]
+Level 30: [['______', 'q5x', '$'], ['______', 'q5s', 'x'], ['______', 'q5x', '$'], ['______', 'q5s', 'x'], ['______', 'q5x', '$']]
+Level 31: [['______$', 'q5x', ''], ['______x', 'q5s', ''], ['______$', 'q5x', ''], ['______x', 'q5s', ''], ['______$', 'q5x', '']]
+Level 32: [['______', 'qrej', '$_'], ['______', 'qacc', 'x_'], ['______', 'qrej', '$_'], ['______', 'qacc', 'x_'], ['______', 'qrej', '$_']]
+String accepted in 32 transitions
+Level 0: '', 'q1', '1111111'
+Level 1: '$', 'q2', '111111'
+Level 2: '$x', 'q3', '11111'
+Level 3: '$xx', 'q3', '1111'
+Level 4: '$xxx', 'q3', '111'
+Level 5: '$xxxx', 'q3', '11'
+Level 6: '$xxx', 'q4', 'x11'
+Level 7: '$xx', 'q4', 'xx11'
+Level 8: '$x', 'q4', 'xxx11'
+Level 9: '$', 'q4', 'xxxx11'
+Level 10: '', 'q4', '$xxxx11'
+Level 11: '_', 'q5s', 'xxxx11'
+Level 12: '_x', 'q5s', 'xxx11'
+Level 13: '_xx', 'q5s', 'xx11'
+Level 14: '_xxx', 'q5s', 'x11'
+Level 15: '_xxxx', 'q5s', '11'
+Level 16: '_xxx', 'q6', 'x$1'
+Level 17: '_xx', 'q6', 'xx$1'
+Level 18: '_x', 'q6', 'xxx$1'
+Level 19: '_', 'q6', 'xxxx$1'
+Level 20: '', 'q6', '_xxxx$1'
+Level 21: '_', 'q7', 'xxxx$1'
+Level 22: '__', 'q5x', 'xxx$1'
+Level 23: '___', 'q5x', 'xx$1'
+Level 24: '____', 'q5x', 'x$1'
+Level 25: '_____', 'q5x', '$1'
+Level 26: '_____$', 'q5x', '1'
+Level 27: '_____', 'q6', '$x'
+Level 28: '____', 'q6', '_$x'
+Level 29: '_____', 'q7', '$x'
+Level 30: '______', 'q5s', 'x'
+Level 31: '______x', 'q5s', ''
+Level 32: '______', 'qacc', 'x_'
+
+$ uv run main.py ./input/equal_01s.csv "101010"
+Tracing NTM: {w | w has the same number of 0's and 1's} Nondeterministic on input '101010'
+Tree Depth: 25
+Transitions simulated: 41
+Level 0: [['', 'q0', '101010']]
+Level 1: [['_', 'q2', '01010']]
+Level 2: [['', 'q3', '_x1010']]
+Level 3: [['_', 'q4', 'x1010'], ['_', 'q5', 'x1010']]
+Level 4: [['_x', 'q4', '1010'], ['_x', 'q5', '1010']]
+Level 5: [['_xx', 'q2', '010'], ['_x', 'qrej', '1010']]
+Level 6: [['_x', 'q3', 'xx10']]
+Level 7: [['_', 'q3', 'xxx10']]
+Level 8: [['', 'q3', '_xxx10']]
+Level 9: [['_', 'q4', 'xxx10'], ['_', 'q5', 'xxx10']]
+Level 10: [['_x', 'q4', 'xx10'], ['_x', 'q5', 'xx10']]
+Level 11: [['_xx', 'q4', 'x10'], ['_xx', 'q5', 'x10']]
+Level 12: [['_xxx', 'q4', '10'], ['_xxx', 'q5', '10']]
+Level 13: [['_xxxx', 'q2', '0'], ['_xxx', 'qrej', '10']]
+Level 14: [['_xxx', 'q3', 'xx']]
+Level 15: [['_xx', 'q3', 'xxx']]
+Level 16: [['_x', 'q3', 'xxxx']]
+Level 17: [['_', 'q3', 'xxxxx']]
+Level 18: [['', 'q3', '_xxxxx']]
+Level 19: [['_', 'q4', 'xxxxx'], ['_', 'q5', 'xxxxx']]
+Level 20: [['_x', 'q4', 'xxxx'], ['_x', 'q5', 'xxxx']]
+Level 21: [['_xx', 'q4', 'xxx'], ['_xx', 'q5', 'xxx']]
+Level 22: [['_xxx', 'q4', 'xx'], ['_xxx', 'q5', 'xx']]
+Level 23: [['_xxxx', 'q4', 'x'], ['_xxxx', 'q5', 'x']]
+Level 24: [['_xxxxx', 'q4', ''], ['_xxxxx', 'q5', '']]
+Level 25: [['_xxxx', 'q3', 'x_'], ['_xxxxx_', 'qacc', '']]
+String accepted in 25 transitions
+Level 0: '', 'q0', '101010'
+Level 1: '_', 'q2', '01010'
+Level 2: '', 'q3', '_x1010'
+Level 3: '_', 'q4', 'x1010'
+Level 4: '_x', 'q4', '1010'
+Level 5: '_xx', 'q2', '010'
+Level 6: '_x', 'q3', 'xx10'
+Level 7: '_', 'q3', 'xxx10'
+Level 8: '', 'q3', '_xxx10'
+Level 9: '_', 'q4', 'xxx10'
+Level 10: '_x', 'q4', 'xx10'
+Level 11: '_xx', 'q4', 'x10'
+Level 12: '_xxx', 'q4', '10'
+Level 13: '_xxxx', 'q2', '0'
+Level 14: '_xxx', 'q3', 'xx'
+Level 15: '_xx', 'q3', 'xxx'
+Level 16: '_x', 'q3', 'xxxx'
+Level 17: '_', 'q3', 'xxxxx'
+Level 18: '', 'q3', '_xxxxx'
+Level 19: '_', 'q5', 'xxxxx'
+Level 20: '_x', 'q5', 'xxxx'
+Level 21: '_xx', 'q5', 'xxx'
+Level 22: '_xxx', 'q5', 'xx'
+Level 23: '_xxxx', 'q5', 'x'
+Level 24: '_xxxxx', 'q5', ''
+Level 25: '_xxxxx_', 'qacc', ''
