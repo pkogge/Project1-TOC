@@ -8,9 +8,8 @@ This directory contains **1-tape Turing machine definitions** written in CSV for
 
 ### Language
 
-[
-L = { a^n b^n c^n \mid n \ge 1 }
-]
+L = { a^n b^n c^n | n >= 1 }
+
 
 ### Description
 
@@ -64,9 +63,8 @@ python main.py src/input/an_bn_cn.csv aabbcc --max_depth 1000
 
 ### Language
 
-[
-L = { w \in {0,1}^* \mid #0(w) = #1(w) }
-]
+L = { w in {0,1}* | #0(w) = #1(w) }
+
 
 ### Description
 
